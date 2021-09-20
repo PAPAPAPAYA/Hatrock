@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{1EE98971-DB57-CCE3-EB35-7D60258BAC4D}</ProjectGuid>
+    <ProjectGuid>{39BD9B70-9B36-762B-C75F-D16B1A1C6C1E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,7 +53,11 @@
     <UnityVersion>2020.3.18f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\PlayerScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerScript.cs" />
+    <Compile Include="Assets\Scripts\MouseManager.cs" />
+    <Compile Include="Assets\Scripts\SpellCtrlScript.cs" />
+    <Compile Include="Assets\Scripts\CapsuleScript.cs" />
+    <Compile Include="Assets\Scripts\SpellScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
