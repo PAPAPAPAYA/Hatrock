@@ -54,10 +54,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
-    <Compile Include="Assets\Scripts\MouseManager.cs" />
     <Compile Include="Assets\Scripts\SpellCtrlScript.cs" />
     <Compile Include="Assets\Scripts\CapsuleScript.cs" />
+    <Compile Include="Assets\Scripts\MouseManager.cs" />
     <Compile Include="Assets\Scripts\SpellScript.cs" />
+    <Compile Include="Assets\Log.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
