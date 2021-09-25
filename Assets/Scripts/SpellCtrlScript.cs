@@ -14,6 +14,7 @@ public class SpellCtrlScript : MonoBehaviour
 
 	public enum CastType
 	{
+		none,
 		projectile,
 		aoe,
 		pie,
@@ -38,15 +39,18 @@ public class SpellCtrlScript : MonoBehaviour
 			currentCastType = CastType.aoe;
 		}
 
+		currentCastType = PlayerScript.me.currentMat.GetComponent<MatScript>().matCastType;
+
+		// if cast type projectile
 		if (currentCastType == CastType.projectile)
 		{
 			aoeRangeIndicator.SetActive(false);
 			if (Input.GetMouseButtonDown(0))
 			{
-				GameObject spell = Instantiate(spellPrefab, spellSpawnLoc.position, spellSpawnLoc.rotation);
-				spell.GetComponent<Rigidbody>().AddForce(spellSpawnLoc.transform.forward * spellSpd, ForceMode.Impulse);
+				SpawnSpell_proj();
 			}
 		}
+		// if cast type aoe
 		else if (currentCastType == CastType.aoe)
 		{
 			// show range
@@ -80,5 +84,12 @@ public class SpellCtrlScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.05f);
 		aoeRangeIndicator.GetComponent<SpriteRenderer>().color = ariOgColor;
+	}
+
+	private void SpawnSpell_proj()
+	{
+		GameObject spell = Instantiate(spellPrefab, spellSpawnLoc.position, spellSpawnLoc.rotation);
+		spell.GetComponent<Rigidbody>().AddForce(spellSpawnLoc.transform.forward * spellSpd, ForceMode.Impulse);
+		spell.GetComponent<MeshRenderer>().material = PlayerScript.me.currentMat.GetComponent<MatScript>().myMaterial;
 	}
 }
