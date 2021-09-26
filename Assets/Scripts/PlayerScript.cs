@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+	static public PlayerScript me;
 	public float spd;
+	public float hp;
+	public GameObject currentMat;
+
+	private void Awake()
+	{
+		me = this;
+	}
+
 	private void Update()
 	{
 		// simple movement for now

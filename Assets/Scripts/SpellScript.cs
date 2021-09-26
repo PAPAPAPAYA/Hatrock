@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class SpellScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        // destroy it after 3 seconds
+        Destroy(gameObject, 3);
     }
 }
