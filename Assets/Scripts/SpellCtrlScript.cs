@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpellCtrlScript : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class SpellCtrlScript : MonoBehaviour
 	public GameObject targetIndicator;
 	public float aoeDistance;
 
-	private Color ariOgColor;
+	private Color aoeOgColor;
 
 	public enum CastType
 	{
@@ -26,8 +27,8 @@ public class SpellCtrlScript : MonoBehaviour
 
 	private void Start()
 	{
-		ariOgColor = aoeRangeIndicator.GetComponent<SpriteRenderer>().color;
-		pieRangeIndicator.GetComponent<SpriteRenderer>().color = ariOgColor;
+		aoeOgColor = aoeRangeIndicator.GetComponent<SpriteRenderer>().color;
+		pieRangeIndicator.GetComponent<Image>().color = aoeOgColor;
 	}
 	
 	private void Update()
@@ -94,9 +95,12 @@ public class SpellCtrlScript : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-				pieRangeIndicator.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
-				StartCoroutine(ChangeToDefaultColor(pieRangeIndicator));
+				pieRangeIndicator.GetComponent<Image>().color = new Color(255, 255, 255, 1);
             }
+			else if (Input.GetMouseButtonUp(0))
+            {
+				pieRangeIndicator.GetComponent<Image>().color = aoeOgColor;
+			}
         }
 		else if(currentCastType == CastType.target)
         {
@@ -124,7 +128,7 @@ public class SpellCtrlScript : MonoBehaviour
 	private IEnumerator ChangeToDefaultColor(GameObject indicator)
 	{
 		yield return new WaitForSeconds(0.05f);
-		indicator.GetComponent<SpriteRenderer>().color = ariOgColor;
+		indicator.GetComponent<SpriteRenderer>().color = aoeOgColor;
 	}
 
 	private void SpawnSpell_proj()
