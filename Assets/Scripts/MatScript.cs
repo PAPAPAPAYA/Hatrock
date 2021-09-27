@@ -18,4 +18,16 @@ public class MatScript : MonoBehaviour
     public float aoe_distance;
     public float aoe_range;
 
+    void Update()
+    {
+        //Easy to test
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            matCastType = SpellCtrlScript.CastType.projectile;
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            matCastType = SpellCtrlScript.CastType.aoe;
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            matCastType = SpellCtrlScript.CastType.pie;
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            matCastType = SpellCtrlScript.CastType.target;
+    }
 }
