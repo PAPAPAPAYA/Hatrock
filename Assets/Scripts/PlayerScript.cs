@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour
 			transform.position = new Vector3(transform.position.x + spd * Time.deltaTime, transform.position.y, transform.position.z);
 		}
 
-		// look at mouse pos
-		transform.LookAt(MouseManager.me.mousePos);
+		// look at mouse pos(not changing y-axis)
+		transform.LookAt(new Vector3(MouseManager.me.mousePos.x, transform.position.y, MouseManager.me.mousePos.z));
 	}
 }

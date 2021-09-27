@@ -8,6 +8,8 @@ public class SpellCtrlScript : MonoBehaviour
     public GameObject spellPrefab;
 	public float spellSpd;
 	public GameObject aoeRangeIndicator;
+	public GameObject pieRangeIndicator;
+	public GameObject targetIndicator;
 	public float aoeDistance;
 
 	private Color ariOgColor;
@@ -25,8 +27,9 @@ public class SpellCtrlScript : MonoBehaviour
 	private void Start()
 	{
 		ariOgColor = aoeRangeIndicator.GetComponent<SpriteRenderer>().color;
+		pieRangeIndicator.GetComponent<SpriteRenderer>().color = ariOgColor;
 	}
-
+	
 	private void Update()
 	{
 		// choose cast type
@@ -38,13 +41,16 @@ public class SpellCtrlScript : MonoBehaviour
 		{
 			currentCastType = CastType.aoe;
 		}
-
+		
 		currentCastType = PlayerScript.me.currentMat.GetComponent<MatScript>().matCastType;
 
 		// if cast type projectile
 		if (currentCastType == CastType.projectile)
 		{
 			aoeRangeIndicator.SetActive(false);
+			pieRangeIndicator.SetActive(false);
+			targetIndicator.SetActive(false);
+
 			if (Input.GetMouseButtonDown(0))
 			{
 				SpawnSpell_proj();
@@ -55,6 +61,8 @@ public class SpellCtrlScript : MonoBehaviour
 		{
 			// show range
 			aoeRangeIndicator.SetActive(true);
+			pieRangeIndicator.SetActive(false);
+			targetIndicator.SetActive(false);
 
 			// restrict distance
 			float dist = Vector3.Distance(MouseManager.me.mousePos, transform.position);
@@ -75,15 +83,48 @@ public class SpellCtrlScript : MonoBehaviour
 			if (Input.GetMouseButtonDown(0))
 			{
 				aoeRangeIndicator.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
-				StartCoroutine("ChangeToDefaultColor");
+				StartCoroutine(ChangeToDefaultColor(aoeRangeIndicator));
 			}
 		}
+		else if(currentCastType == CastType.pie)
+        {
+			aoeRangeIndicator.SetActive(false);
+			pieRangeIndicator.SetActive(true);
+			targetIndicator.SetActive(false);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+				pieRangeIndicator.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
+				StartCoroutine(ChangeToDefaultColor(pieRangeIndicator));
+            }
+        }
+		else if(currentCastType == CastType.target)
+        {
+			aoeRangeIndicator.SetActive(false);
+			pieRangeIndicator.SetActive(false);
+
+			//if selected enemy, then show the indicator
+            if (MouseManager.me.slctedEnemy)
+            {
+				targetIndicator.SetActive(true);
+                if (Input.GetMouseButtonDown(0))
+                {
+					targetIndicator.GetComponent<Light>().color = new Color(0, 159, 179, 1);
+                }
+				if(Input.GetMouseButtonUp(0))
+					targetIndicator.GetComponent<Light>().color = new Color(176, 0, 0, 1);
+			}
+            else
+            {
+				targetIndicator.SetActive(false);
+            }
+        }
 	}
 
-	private IEnumerator ChangeToDefaultColor()
+	private IEnumerator ChangeToDefaultColor(GameObject indicator)
 	{
 		yield return new WaitForSeconds(0.05f);
-		aoeRangeIndicator.GetComponent<SpriteRenderer>().color = ariOgColor;
+		indicator.GetComponent<SpriteRenderer>().color = ariOgColor;
 	}
 
 	private void SpawnSpell_proj()

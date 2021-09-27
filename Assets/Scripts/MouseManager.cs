@@ -7,6 +7,7 @@ public class MouseManager : MonoBehaviour
     static public MouseManager me;
     public Vector3 mousePos;
     public LayerMask ignoreMe;
+    public bool slctedEnemy = false;
 
 	private void Awake()
 	{
@@ -31,6 +32,16 @@ public class MouseManager : MonoBehaviour
         if (Physics.Raycast(mouseRay, out rayHit, mouseRayDist, ~ignoreMe))
         {
             mousePos = rayHit.point;
+
+            //Detect the layer hits enemy or not, and set the public bool
+            if(rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                slctedEnemy = true;
+            }
+            else
+            {
+                slctedEnemy = false;
+            }
         }
     }
 }
