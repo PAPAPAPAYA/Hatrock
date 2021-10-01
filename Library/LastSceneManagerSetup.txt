@@ -1,5 +1,9 @@
 sceneSetups:
-- path: Assets/Scenes/SampleScene.unity
+<<<<<<< Updated upstream
+- path: Assets/Scenes/BlockMesh.unity
+=======
+- path: Assets/AyeFolder/AITextScene.unity
+>>>>>>> Stashed changes
   isLoaded: 1
   isActive: 1
   isSubScene: 0
