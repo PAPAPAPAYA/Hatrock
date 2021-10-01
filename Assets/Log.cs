@@ -21,3 +21,21 @@
 	// effect struct = effect the mat gives to the spell
 	// there can be only one material to be activated
 	// combination of materials functions as one new material
+
+// 9/30/21
+// adjustments
+	// projectile doesn't use gravity for now
+	
+// features
+	// collision detection
+	// projectile
+		// xhave place to insert effect codes
+	// aoe
+		// xspawn a transparent cyllinder to indicate collider
+		// xscale aoe indicator according to the size of the collider
+		// xhave place to insert effect codes
+	// pie
+		// use dot to check if hit
+		// find place to insert effect codes
+	// target
+		// find place to insert effect codes

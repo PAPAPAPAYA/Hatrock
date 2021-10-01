@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class SpellScript : MonoBehaviour
 {
-    void Update()
-    {
-        // destroy it after 3 seconds
-        Destroy(gameObject, 3);
-    }
+
+	private void Update()
+	{
+		
+	}
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.gameObject.CompareTag("Enemy"))
+		{
+			// effect here
+			print("hit enemy with a projectile");
+		}
+		if (!collision.gameObject.CompareTag("Player"))
+		{
+			Destroy(gameObject);
+		}
+	}
 }

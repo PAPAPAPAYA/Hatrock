@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class SpellCtrlScript : MonoBehaviour
 {
+	[Header("PROJECTILE")]
     public Transform spellSpawnLoc;
-    public GameObject spellPrefab;
+    public GameObject spell_proj_prefab;
 	public float spellSpd;
+	[Header("AOE")]
+	public GameObject spell_AOE_prefab;
 	public GameObject aoeRangeIndicator;
-	public GameObject pieRangeIndicator;
-	public GameObject targetIndicator;
 	public float aoeDistance;
+	public float aoeScale;
+	private Color aoeOgColor;
 
-	private Color ariOgColor;
+	[Header("PIE")]
+	public GameObject pieRangeIndicator;
+	[Header("TARGET")]
+	public GameObject targetIndicator;
+	
 
 	public enum CastType
 	{
@@ -26,8 +33,8 @@ public class SpellCtrlScript : MonoBehaviour
 
 	private void Start()
 	{
-		ariOgColor = aoeRangeIndicator.GetComponent<SpriteRenderer>().color;
-		pieRangeIndicator.GetComponent<SpriteRenderer>().color = ariOgColor;
+		aoeOgColor = aoeRangeIndicator.GetComponent<SpriteRenderer>().color;
+		pieRangeIndicator.GetComponent<SpriteRenderer>().color = aoeOgColor;
 	}
 	
 	private void Update()
@@ -64,6 +71,13 @@ public class SpellCtrlScript : MonoBehaviour
 			pieRangeIndicator.SetActive(false);
 			targetIndicator.SetActive(false);
 
+			// get aoe params from current material
+			aoeScale = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_range;
+			aoeDistance = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_distance;
+
+			// change indicator range according to spell range
+			aoeRangeIndicator.transform.localScale = new Vector3(aoeScale / 15, aoeScale / 15, 1);
+
 			// restrict distance
 			float dist = Vector3.Distance(MouseManager.me.mousePos, transform.position);
 			if (dist > aoeDistance)
@@ -82,8 +96,9 @@ public class SpellCtrlScript : MonoBehaviour
 			// cast the spell
 			if (Input.GetMouseButtonDown(0))
 			{
-				aoeRangeIndicator.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
-				StartCoroutine(ChangeToDefaultColor(aoeRangeIndicator));
+				//aoeRangeIndicator.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
+				//StartCoroutine(ChangeToDefaultColor(aoeRangeIndicator));
+				SpawnSpell_aoe();
 			}
 		}
 		else if(currentCastType == CastType.pie)
@@ -124,13 +139,23 @@ public class SpellCtrlScript : MonoBehaviour
 	private IEnumerator ChangeToDefaultColor(GameObject indicator)
 	{
 		yield return new WaitForSeconds(0.05f);
-		indicator.GetComponent<SpriteRenderer>().color = ariOgColor;
+		indicator.GetComponent<SpriteRenderer>().color = aoeOgColor;
 	}
 
-	private void SpawnSpell_proj()
+	private void SpawnSpell_proj() // send out the spell
 	{
-		GameObject spell = Instantiate(spellPrefab, spellSpawnLoc.position, spellSpawnLoc.rotation);
-		spell.GetComponent<Rigidbody>().AddForce(spellSpawnLoc.transform.forward * spellSpd, ForceMode.Impulse);
+		GameObject spell = Instantiate(spell_proj_prefab, spellSpawnLoc.position, spellSpawnLoc.rotation);
 		spell.GetComponent<MeshRenderer>().material = PlayerScript.me.currentMat.GetComponent<MatScript>().myMaterial;
+		//spell.GetComponent<Rigidbody>().mass = PlayerScript.me.currentMat.GetComponent<MatScript>().mass;
+		spell.GetComponent<Rigidbody>().mass = PlayerScript.me.currentMat.GetComponent<MatScript>().mass;
+		spell.GetComponent<Rigidbody>().AddForce(spellSpawnLoc.transform.forward * spellSpd, ForceMode.Impulse);
+	}
+
+	private void SpawnSpell_aoe() // spawn a collider
+	{
+		GameObject aoeSpell = Instantiate(spell_AOE_prefab);
+		aoeSpell.transform.position = aoeRangeIndicator.transform.position;
+		//aoeSpell.GetComponent<CapsuleCollider>().radius = aoeRadius;
+		aoeSpell.transform.localScale = new Vector3(aoeScale, 2f, aoeScale);
 	}
 }
