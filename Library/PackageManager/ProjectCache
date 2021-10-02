@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637687225429258097
+      ticks: 637687343815036703
     m_Hash: 2082775321
   m_LockFileStatus:
     m_FilePath: D:/Capstone/Hatrock/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637687225429267996
+      ticks: 637687343814996816
     m_Hash: 2661195484
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
@@ -2720,4 +2720,4 @@ m_PackageAssets:
   m_LocalPackages:
     m_LocalFileStatus: []
 m_ProjectPath: D:/Capstone/Hatrock/Packages
-m_EditorVersion: 2020.3.19f1 (68f137dc9bbe)
+m_EditorVersion: 2020.3.18f1 (a7d1c678663c)
