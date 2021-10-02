@@ -111,7 +111,7 @@ MonoBehaviour:
     HOT_interval: 0
     HOT_duration: 0
     matProduce: []
-  mass: 1
-  spd: 10
-  aoe_distance: 0
-  aoe_range: 0
+  mass: 0.7
+  spd: 12
+  aoe_distance: 4
+  aoe_range: 3

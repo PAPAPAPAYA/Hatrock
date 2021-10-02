@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/AyeFolder/AITextScene.unity
+=======
+- path: Assets/Scenes/SampleScene.unity
+>>>>>>> master
   isLoaded: 1
   isActive: 1
   isSubScene: 0
