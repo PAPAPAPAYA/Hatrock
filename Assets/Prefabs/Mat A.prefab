@@ -114,4 +114,4 @@ MonoBehaviour:
   mass: 0.7
   spd: 12
   aoe_distance: 4
-  aoe_range: 2
+  aoe_range: 3

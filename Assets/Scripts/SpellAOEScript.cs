@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class SpellAOEScript : MonoBehaviour
 {
+	public List<GameObject> targetsInAoe;
+
 	void Update()
 	{
 		// destroy it after 3 seconds
 		Destroy(gameObject, 3);
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerStay(Collider other)
 	{
-		if (collision.gameObject.CompareTag("Enemy"))
+		if (other.gameObject.CompareTag("Enemy"))
 		{
 			// effect here
-			print("hit enemy with an aoe");
+			print("enemy in aoe");
 		}
 	}
 }

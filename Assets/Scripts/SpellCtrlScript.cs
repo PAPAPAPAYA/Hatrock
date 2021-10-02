@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpellCtrlScript : MonoBehaviour
 {
@@ -8,15 +9,19 @@ public class SpellCtrlScript : MonoBehaviour
     public Transform spellSpawnLoc;
     public GameObject spell_proj_prefab;
 	public float spellSpd;
+
 	[Header("AOE")]
 	public GameObject spell_AOE_prefab;
 	public GameObject aoeRangeIndicator;
 	public float aoeDistance;
-	public float aoeScale;
+	public float aoeRadius;
 	private Color aoeOgColor;
 
 	[Header("PIE")]
 	public GameObject pieRangeIndicator;
+	public float pieRadius;
+	public float pieAngle;
+
 	[Header("TARGET")]
 	public GameObject targetIndicator;
 	
@@ -34,7 +39,7 @@ public class SpellCtrlScript : MonoBehaviour
 	private void Start()
 	{
 		aoeOgColor = aoeRangeIndicator.GetComponent<SpriteRenderer>().color;
-		pieRangeIndicator.GetComponent<SpriteRenderer>().color = aoeOgColor;
+		//pieRangeIndicator.GetComponent<SpriteRenderer>().color = aoeOgColor;
 	}
 	
 	private void Update()
@@ -72,11 +77,12 @@ public class SpellCtrlScript : MonoBehaviour
 			targetIndicator.SetActive(false);
 
 			// get aoe params from current material
-			aoeScale = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_range;
+			aoeRadius = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_range;
 			aoeDistance = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_distance;
 
 			// change indicator range according to spell range
-			aoeRangeIndicator.transform.localScale = new Vector3(aoeScale / 15, aoeScale / 15, 1);
+			aoeRangeIndicator.transform.localScale = new Vector3(aoeRadius / 15, aoeRadius / 15, 1);
+			//aoeRangeIndicator.GetComponent<Light>().spotAngle = aoeRadius;
 
 			// restrict distance
 			float dist = Vector3.Distance(MouseManager.me.mousePos, transform.position);
@@ -86,11 +92,11 @@ public class SpellCtrlScript : MonoBehaviour
 				fromOriginToObject *= aoeDistance;
 				fromOriginToObject /= dist;
 				aoeRangeIndicator.transform.position = transform.position + fromOriginToObject;
-				aoeRangeIndicator.transform.position = new Vector3(aoeRangeIndicator.transform.position.x, 0.1f, aoeRangeIndicator.transform.position.z);
+				aoeRangeIndicator.transform.position = new Vector3(aoeRangeIndicator.transform.position.x, .1f, aoeRangeIndicator.transform.position.z);
 			}
 			else
 			{
-				aoeRangeIndicator.transform.position = new Vector3(MouseManager.me.mousePos.x, 0.1f, MouseManager.me.mousePos.z);
+				aoeRangeIndicator.transform.position = new Vector3(MouseManager.me.mousePos.x, .1f, MouseManager.me.mousePos.z);
 			}
 			
 			// cast the spell
@@ -107,11 +113,14 @@ public class SpellCtrlScript : MonoBehaviour
 			pieRangeIndicator.SetActive(true);
 			targetIndicator.SetActive(false);
 
+			pieRangeIndicator.GetComponent<Image>().fillAmount = 1f / 360f * pieAngle;
+			Quaternion targetAngle = Quaternion.Euler(0, 0, pieAngle / 2 - 180f);
+			pieRangeIndicator.GetComponent<RectTransform>().localRotation = targetAngle;
+
             if (Input.GetMouseButtonDown(0))
             {
-				pieRangeIndicator.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
-				StartCoroutine(ChangeToDefaultColor(pieRangeIndicator));
-            }
+				SpawnSpell_pie();
+			}
         }
 		else if(currentCastType == CastType.target)
         {
@@ -125,9 +134,11 @@ public class SpellCtrlScript : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
 					targetIndicator.GetComponent<Light>().color = new Color(0, 159, 179, 1);
+					//! insert effect codes here
+					print("hit enemy with target");
                 }
 				if(Input.GetMouseButtonUp(0))
-					targetIndicator.GetComponent<Light>().color = new Color(176, 0, 0, 1);
+					targetIndicator.GetComponent<Light>().color = new Color(255, 255, 255, 1);
 			}
             else
             {
@@ -155,7 +166,27 @@ public class SpellCtrlScript : MonoBehaviour
 	{
 		GameObject aoeSpell = Instantiate(spell_AOE_prefab);
 		aoeSpell.transform.position = aoeRangeIndicator.transform.position;
-		//aoeSpell.GetComponent<CapsuleCollider>().radius = aoeRadius;
-		aoeSpell.transform.localScale = new Vector3(aoeScale, 2f, aoeScale);
+		aoeSpell.transform.localScale = new Vector3(aoeRadius, 2f, aoeRadius);
+	}
+
+	private void SpawnSpell_pie() // check if enemy in pie
+	{
+		Collider[] targetsAround = Physics.OverlapSphere(transform.position, pieRadius);
+		foreach (var collider in targetsAround)
+		{
+			if (collider.gameObject.CompareTag("Enemy"))
+			{
+				Vector3 tempV3 = new Vector3(collider.transform.position.x, 0, collider.transform.position.z);
+				if (Vector3.Angle(transform.forward, tempV3 - transform.position) < pieAngle / 2)
+				{
+					//! insert effect here
+					print("hit enemy with pie");
+				}
+				else
+				{
+					print(collider.gameObject.name + " not in pie, its angle: " + Vector3.Angle(transform.forward, tempV3 - transform.position));
+				}
+			}
+		}
 	}
 }

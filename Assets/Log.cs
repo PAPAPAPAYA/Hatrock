@@ -28,14 +28,16 @@
 	
 // features
 	// collision detection
-	// projectile
+	// xprojectile
 		// xhave place to insert effect codes
-	// aoe
+	// xaoe
 		// xspawn a transparent cyllinder to indicate collider
 		// xscale aoe indicator according to the size of the collider
 		// xhave place to insert effect codes
-	// pie
-		// use dot to check if hit
-		// find place to insert effect codes
-	// target
-		// find place to insert effect codes
+		// xfix the bug where no collision is detected
+	// xpie
+		// xuse angle to check if hit
+		// xchange pie range indicator accordingly
+		// xfind place to insert effect codes
+	// xtarget
+		// xfind place to insert effect codes
