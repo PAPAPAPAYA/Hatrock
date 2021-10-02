@@ -18,6 +18,14 @@ public class MatScript : MonoBehaviour
     public float aoe_distance;
     public float aoe_range;
 
+    [Header("Pie")]
+    public float angle;
+    public float radius;
+
+    [Header("Target")]
+    public float range;
+    public bool TargetSelf;
+
     void Update()
     {
         //Easy to test
