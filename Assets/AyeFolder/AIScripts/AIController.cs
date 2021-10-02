@@ -28,7 +28,7 @@ public class AIController : MonoBehaviour
 
     void Start()
     {
-
+        currentState = walkingState;
     }
 
     void Update()

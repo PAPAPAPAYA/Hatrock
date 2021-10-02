@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AIStatePostAttack : AIStateBase
+public class AIStatePostAttack : AIStateBase
 {
     public override void StartState(AIController AC)
     {
