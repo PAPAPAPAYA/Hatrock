@@ -7,7 +7,7 @@ public class SpellScript : MonoBehaviour
 
 	private void Update()
 	{
-		
+		Destroy(gameObject, 3);
 	}
 	private void OnCollisionEnter(Collision collision)
 	{

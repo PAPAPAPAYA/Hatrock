@@ -416,6 +416,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5363780074866141289, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
   m_PrefabInstance: {fileID: 1875482232}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &611036629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611036628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b8b30d4f2814b4d8f3d0c571b703f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  namae: 
+  matCastType: 1
+  compound: 0
+  myMaterial: {fileID: 2100000, guid: c8bf955c2a90da7449d9456458e99853, type: 2}
+  myEffects: []
+  mass: 1
+  spd: 2
+  aoe_distance: 4
+  aoe_range: 3
+  angle: 90
+  radius: 2
+  range: 0
+  TargetSelf: 0
 --- !u!1 &616564215
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,7 +897,7 @@ MonoBehaviour:
     - {fileID: 3072454774791025738, guid: b10d6266975052a4db91d28b836a1a6f, type: 3}
     - {fileID: 8441474695682364324, guid: 212051402683f614781bcf259e7847f1, type: 3}
     RequiredAmout: 0100000001000000
-    Outcome: {fileID: 7347339357971675122, guid: 2b148fd6fbc2edb4dbfaca43a452ddcf, type: 3}
+    Outcome: {fileID: 7385027715785288007, guid: 430ddac43904a9249b46273311ea90a4, type: 3}
   player: {fileID: 1708728301}
   spellCtrlScrip: {fileID: 0}
   instruction: {fileID: 1248323401}
@@ -1667,10 +1692,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1708728302}
-  - component: {fileID: 1708728303}
   - component: {fileID: 1708728304}
   - component: {fileID: 1708728305}
   - component: {fileID: 1708728306}
+  - component: {fileID: 1708728303}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1703,10 +1728,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1708728301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1b50ce17f17e964ab710bc6328a1875, type: 3}
+  m_Script: {fileID: 11500000, guid: 9767fad848076fb44ad2d60da910bc76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spd: 2
+  spd: 4
   hp: 0
   currentMat: {fileID: 611036628}
   recipeManager: {fileID: 815639723}
@@ -1893,7 +1918,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5363780074866141291, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
 --- !u!1 &1956512666
 GameObject:
