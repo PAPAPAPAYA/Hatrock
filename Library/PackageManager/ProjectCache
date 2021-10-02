@@ -113,12 +113,7 @@ m_PackageAssets:
         - 1.3.9
         - 1.4.9
         - 1.5.7
-        - 1.6.0
-        - 1.7.1
-        - 1.8.0
         - 1.9.0
-        - 1.10.2
-        - 1.11.2
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -131,8 +126,6 @@ m_PackageAssets:
         - 2.1.0-preview.6
         compatible:
         - 1.9.0
-        - 1.10.2
-        - 1.11.2
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -172,7 +165,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637637594290000000
+      datePublishedTicks: 0
       documentationUrl: 
       hasRepository: 1
       repository:
@@ -366,7 +359,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637613656180000000
+      datePublishedTicks: 0
       documentationUrl: 
       hasRepository: 1
       repository:
@@ -407,7 +400,6 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
-        - 1.2.4
         compatible:
         - 1.0.2
         - 1.0.3
@@ -420,8 +412,7 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
-        - 1.2.4
-        verified: 1.2.4
+        verified: 1.2.3
       dependencies: []
       resolvedDependencies: []
       keywords: []
@@ -494,7 +485,6 @@ m_PackageAssets:
         - 1.1.22
         - 1.1.24
         - 1.1.26
-        - 1.1.27
         - 1.1.29
         compatible:
         - 1.1.29
@@ -528,12 +518,12 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637647922650000000
+      datePublishedTicks: 0
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
-        url: git+https://github.com/Unity-Technologies/com.unity.test-framework.git
+        url: https://github.com/Unity-Technologies/com.unity.test-framework.git
         revision: dac53542acdab7a12e9ebf111ac588d0e53cf483
         path: 
     - packageId: com.unity.textmeshpro@3.0.6
@@ -614,7 +604,6 @@ m_PackageAssets:
         - 1.5.4
         - 1.5.5
         - 1.5.6
-        - 1.6.0-preview.1
         - 2.0.0
         - 2.0.1-preview.1
         - 2.0.1
@@ -636,7 +625,6 @@ m_PackageAssets:
         - 2.1.4
         - 2.1.5
         - 2.1.6
-        - 2.2.0-preview.1
         - 3.0.0-preview.1
         - 3.0.0-preview.3
         - 3.0.0-preview.4
@@ -654,10 +642,8 @@ m_PackageAssets:
         - 3.0.4
         - 3.0.5
         - 3.0.6
-        - 3.2.0-pre.1
         compatible:
         - 3.0.6
-        - 3.2.0-pre.1
         verified: 3.0.6
       dependencies:
       - name: com.unity.ugui
@@ -774,13 +760,10 @@ m_PackageAssets:
         - 1.5.2
         - 1.5.4
         - 1.5.5
-        - 1.5.6
         - 1.6.0-pre.1
         - 1.6.0-pre.3
         - 1.6.0-pre.4
         - 1.6.0-pre.5
-        - 1.6.1
-        - 1.6.2
         compatible:
         - 1.4.8
         - 1.5.0-pre.2
@@ -795,13 +778,10 @@ m_PackageAssets:
         - 1.5.2
         - 1.5.4
         - 1.5.5
-        - 1.5.6
         - 1.6.0-pre.1
         - 1.6.0-pre.3
         - 1.6.0-pre.4
         - 1.6.0-pre.5
-        - 1.6.1
-        - 1.6.2
         verified: 1.4.8
       dependencies:
       - name: com.unity.modules.director
@@ -2677,14 +2657,12 @@ m_PackageAssets:
         - 0.1.6-preview
         - 0.1.9-preview
         - 1.0.0
-        - 1.0.5
         - 1.0.6
         compatible:
         - 0.1.5-preview
         - 0.1.6-preview
         - 0.1.9-preview
         - 1.0.0
-        - 1.0.5
         - 1.0.6
         verified: 1.0.6
       dependencies: []
@@ -2705,7 +2683,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637429759280000000
+      datePublishedTicks: 0
       documentationUrl: 
       hasRepository: 1
       repository:
