@@ -58,16 +58,16 @@
     <Compile Include="Assets\Scripts\RecipeManagerScript.cs" />
     <Compile Include="Assets\Scripts\SpellCtrlScript.cs" />
     <Compile Include="Assets\Log.cs" />
+    <Compile Include="Assets\HarryFolder\PlayerController.cs" />
     <Compile Include="Assets\Scripts\CapsuleScript.cs" />
     <Compile Include="Assets\Scripts\MatScript.cs" />
     <Compile Include="Assets\Scripts\MaterialManager.cs" />
-    <Compile Include="Assets\Scripts\MouseManager.cs" />
-    <Compile Include="Assets\Scripts\EffectStruct.cs" />
-    <Compile Include="Assets\Scripts\SpellScript.cs" />
-    <Compile Include="Assets\HarryFolder\PlayerController.cs" />
-    <Compile Include="Assets\SimpleSkeleton\script\SimpleSkeletonController.cs" />
     <Compile Include="Assets\HarryFolder\GhostController.cs" />
     <Compile Include="Assets\HarryFolder\Void.cs" />
+    <Compile Include="Assets\Scripts\MouseManager.cs" />
+    <Compile Include="Assets\Scripts\EffectStruct.cs" />
+    <Compile Include="Assets\SimpleSkeleton\script\SimpleSkeletonController.cs" />
+    <Compile Include="Assets\Scripts\SpellScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
