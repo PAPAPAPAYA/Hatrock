@@ -8,6 +8,7 @@ public class MouseManager : MonoBehaviour
     public Vector3 mousePos;
     public LayerMask ignoreMe;
     public bool slctedEnemy = false;
+    public GameObject enemySelected;
 
 	private void Awake()
 	{
@@ -37,10 +38,12 @@ public class MouseManager : MonoBehaviour
             if(rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 slctedEnemy = true;
+                enemySelected = rayHit.transform.gameObject;
             }
             else
             {
                 slctedEnemy = false;
+                enemySelected = null;
             }
         }
     }
