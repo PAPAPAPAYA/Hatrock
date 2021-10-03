@@ -7,16 +7,10 @@ public class RecipeManagerScript : MonoBehaviour
 {
     public List<Recipe> recipeList;
     public GameObject player;
-    public SpellCtrlScript spellCtrlScrip;
     public TextMeshProUGUI instruction;
     public TextMeshProUGUI combination;
-
+    
     public List<GameObject> possibleCombinations;
-
-    private void Start()
-    {
-        spellCtrlScrip = player.GetComponent<SpellCtrlScript>();
-    }
 
     public void SearchRecipeForMats(List<GameObject> choosenMats)
     {
@@ -24,7 +18,7 @@ public class RecipeManagerScript : MonoBehaviour
         {
             if(CompareList(i, choosenMats))
             {
-                spellCtrlScrip.SendMessage("ChangeSpell", recipeList[i].Outcome);
+                player.SendMessage("ChangeSpell", recipeList[i].Outcome);
                 instruction.text = "Selected Materials: ";
                 foreach (var mat in recipeList[i].Materials)
                 {
@@ -39,7 +33,10 @@ public class RecipeManagerScript : MonoBehaviour
                 if(choosenMats[choosenMats.Count - 1].GetComponent<MatScript>().matCastType == SpellCtrlScript.CastType.none)
                     instruction.text = "Selected Materials: " + choosenMats[choosenMats.Count - 1].name + "\nOutcome:\nNone";
                 else
+                {
                     instruction.text = "Selected Materials: " + choosenMats[choosenMats.Count - 1].name + "\nOutcome:\n" + choosenMats[choosenMats.Count - 1].name;
+                }
+                player.SendMessage("ChangeSpell", choosenMats[choosenMats.Count - 1]);
             }
         }
     }
