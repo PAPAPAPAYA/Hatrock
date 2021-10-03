@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   namae: 
-  matCastType: 1
+  matCastType: 2
   compound: 0
   myMaterial: {fileID: 2100000, guid: c8bf955c2a90da7449d9456458e99853, type: 2}
   myEffects:

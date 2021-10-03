@@ -12,7 +12,7 @@ public struct EffectStruct
     public float DOT_duration;
 
     [Header("CTRL")]
-    public MaterialManager.CtrlTypes myCtrlType;
+    public EffectManager.CtrlTypes myCtrlType;
     public float ctrl_duration;
 
     [Header("RECOV")]
@@ -22,5 +22,6 @@ public struct EffectStruct
     public float HOT_duration;
 
     [Header("SPLY")]
-    public List<GameObject> matProduce;
+    public bool dropMat;
+    public List<GameObject> matProduce; // for testing only
 }

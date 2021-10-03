@@ -9,14 +9,7 @@ public class MaterialManager : MonoBehaviour
 	public List<GameObject> matList;
 
 
-    public enum CtrlTypes
-    {
-        none,
-        stun,
-        slow,
-        fear,
-        move
-    };
+    
 
 	private void Awake()
 	{
