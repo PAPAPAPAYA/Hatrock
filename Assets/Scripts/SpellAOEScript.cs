@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpellAOEScript : MonoBehaviour
 {
 	public List<GameObject> targetsInAoe;
+	public GameObject mat;
 
 	void Update()
 	{
@@ -12,12 +13,22 @@ public class SpellAOEScript : MonoBehaviour
 		Destroy(gameObject, 3);
 	}
 
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Enemy"))
+		{
+			// !effect here
+			EffectManager.me.ProcessEffects(mat, other.gameObject);
+			//print("enemy hit by aoe once");
+		}
+	}
+
 	private void OnTriggerStay(Collider other)
 	{
 		if (other.gameObject.CompareTag("Enemy"))
 		{
 			// !effect here
-			print("enemy in aoe");
+			//print("enemy in aoe");
 		}
 	}
 }

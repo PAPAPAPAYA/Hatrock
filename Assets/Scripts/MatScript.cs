@@ -24,7 +24,6 @@ public class MatScript : MonoBehaviour
 
     [Header("Target")]
     public float range;
-    public bool TargetSelf;
 
     void Update()
     {
@@ -37,5 +36,9 @@ public class MatScript : MonoBehaviour
             matCastType = SpellCtrlScript.CastType.pie;
         else if (Input.GetKeyDown(KeyCode.Alpha4))
             matCastType = SpellCtrlScript.CastType.target;
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+		{
+            matCastType = SpellCtrlScript.CastType.self;
+		}
     }
 }
