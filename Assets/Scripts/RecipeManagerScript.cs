@@ -35,9 +35,8 @@ public class RecipeManagerScript : MonoBehaviour
                 else
                 {
                     instruction.text = "Selected Materials: " + choosenMats[choosenMats.Count - 1].name + "\nOutcome:\n" + choosenMats[choosenMats.Count - 1].name;
-                    player.SendMessage("ChangeSpell", choosenMats[choosenMats.Count - 1]);
                 }
-
+                player.SendMessage("ChangeSpell", choosenMats[choosenMats.Count - 1]);
             }
         }
     }

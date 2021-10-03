@@ -26,6 +26,9 @@ public class SpellCtrlScript : MonoBehaviour
 
 	[Header("TARGET")]
 	public GameObject targetIndicator;
+
+	[Header("Self")]
+	public GameObject selfIndicator;
 	
 	public enum CastType
 	{
@@ -55,6 +58,7 @@ public class SpellCtrlScript : MonoBehaviour
 			aoeRangeIndicator.SetActive(false);
 			pieRangeIndicator.SetActive(false);
 			targetIndicator.SetActive(false);
+			selfIndicator.SetActive(false);
 
 			if (Input.GetMouseButtonDown(0))
 			{
@@ -68,6 +72,7 @@ public class SpellCtrlScript : MonoBehaviour
 			aoeRangeIndicator.SetActive(true);
 			pieRangeIndicator.SetActive(false);
 			targetIndicator.SetActive(false);
+			selfIndicator.SetActive(false);
 
 			// get aoe params from current material
 			aoeRadius = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_range;
@@ -105,6 +110,7 @@ public class SpellCtrlScript : MonoBehaviour
 			aoeRangeIndicator.SetActive(false);
 			pieRangeIndicator.SetActive(true);
 			targetIndicator.SetActive(false);
+			selfIndicator.SetActive(false);
 
 			pieRangeIndicator.GetComponent<Image>().fillAmount = 1f / 360f * pieAngle;
 			Quaternion targetAngle = Quaternion.Euler(0, 0, pieAngle / 2 - 180f);
@@ -119,9 +125,10 @@ public class SpellCtrlScript : MonoBehaviour
         {
 			aoeRangeIndicator.SetActive(false);
 			pieRangeIndicator.SetActive(false);
+			selfIndicator.SetActive(false);
 
 			//if selected enemy, then show the indicator
-            if (MouseManager.me.enemySelected != null)
+			if (MouseManager.me.enemySelected != null)
             {
 				targetIndicator.SetActive(true);
                 if (Input.GetMouseButtonDown(0))
@@ -141,11 +148,28 @@ public class SpellCtrlScript : MonoBehaviour
         }
 		else if(currentCastType == CastType.self)
 		{
+			aoeRangeIndicator.SetActive(false);
+			pieRangeIndicator.SetActive(false);
+			targetIndicator.SetActive(false);
+			selfIndicator.SetActive(true);
+
+			if (Input.GetMouseButtonDown(0))
+            {
+				selfIndicator.GetComponent<Light>().color = new Color(0, 159, 179, 1);
+			}
 			//! effect goes here
 			if (Input.GetMouseButtonUp(0))
 			{
 				EffectManager.me.ProcessEffects(ps.currentMat, ps.gameObject);
+				selfIndicator.GetComponent<Light>().color = new Color(59, 190, 55, 1);
 			}
+		}
+        else
+        {
+			Debug.Log("I am none");
+			aoeRangeIndicator.SetActive(false);
+			pieRangeIndicator.SetActive(false);
+			targetIndicator.SetActive(false);
 		}
 	}
 
