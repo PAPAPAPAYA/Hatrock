@@ -1,29 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &7195374670053618783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4380351066936016701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b8b30d4f2814b4d8f3d0c571b703f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  namae: 
-  matCastType: 4
-  compound: 0
-  myMaterial: {fileID: 0}
-  myEffects: []
-  mass: 0
-  spd: 0
-  aoe_distance: 0
-  aoe_range: 0
-  angle: 0
-  radius: 0
-  range: 0
 --- !u!1001 &8549480919546697556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 611036629, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
+      propertyPath: TargetSelf
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 611036629, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
       propertyPath: matCastType
       value: 5
@@ -98,8 +78,3 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5363780074866141291, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
---- !u!1 &4380351066936016701 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5363780074866141289, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
-  m_PrefabInstance: {fileID: 8549480919546697556}
-  m_PrefabAsset: {fileID: 0}

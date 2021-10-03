@@ -9,7 +9,6 @@ public class PlayerScript : MonoBehaviour
 	public float hp;
 	public GameObject currentMat;
 	public GameObject recipeManager;
-	public GameObject spellCtrlManager;
 	private GameObject selectedMat;
 	//Temp inventory
 	[Header("Temp Inventory")]
@@ -102,5 +101,11 @@ public class PlayerScript : MonoBehaviour
     {
 		choosentMats.Clear();
 		choosentMats.Add(selectedMat);
+    }
+
+	public void ChangeSpell(GameObject outcome)
+    {
+		currentMat = outcome;
+		Debug.Log(currentMat.name);
     }
 }
