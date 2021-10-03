@@ -25,7 +25,6 @@ public class SpellCtrlScript : MonoBehaviour
 	[Header("TARGET")]
 	public GameObject targetIndicator;
 	
-
 	public enum CastType
 	{
 		none,
@@ -160,6 +159,7 @@ public class SpellCtrlScript : MonoBehaviour
 		//spell.GetComponent<Rigidbody>().mass = PlayerScript.me.currentMat.GetComponent<MatScript>().mass;
 		spell.GetComponent<Rigidbody>().mass = PlayerScript.me.currentMat.GetComponent<MatScript>().mass;
 		spell.GetComponent<Rigidbody>().AddForce(spellSpawnLoc.transform.forward * spellSpd, ForceMode.Impulse);
+		spell.GetComponent<SpellScript>().mat = gameObject.GetComponent<PlayerScript>().currentMat;
 	}
 
 	private void SpawnSpell_aoe() // spawn a collider

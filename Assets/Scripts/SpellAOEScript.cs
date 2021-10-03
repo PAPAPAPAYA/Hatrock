@@ -16,7 +16,7 @@ public class SpellAOEScript : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Enemy"))
 		{
-			// effect here
+			// !effect here
 			print("enemy in aoe");
 		}
 	}

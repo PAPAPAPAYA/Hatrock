@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpellScript : MonoBehaviour
 {
-
+	public GameObject mat;
 	private void Update()
 	{
 		Destroy(gameObject, 3);
@@ -13,7 +13,9 @@ public class SpellScript : MonoBehaviour
 	{
         if (collision.gameObject.CompareTag("Enemy"))
 		{
-			// effect here
+			//! effect here
+			print(mat.GetComponent<MatScript>().myEffects.Count);
+			EffectManager.me.ProcessEffects(mat, collision.gameObject);
 			print("hit enemy with a projectile");
 		}
 		if (!collision.gameObject.CompareTag("Player"))
