@@ -9,7 +9,7 @@ public class RecipeManagerScript : MonoBehaviour
     public GameObject player;
     public TextMeshProUGUI instruction;
     public TextMeshProUGUI combination;
-
+    
     public List<GameObject> possibleCombinations;
 
     public void SearchRecipeForMats(List<GameObject> choosenMats)
@@ -33,7 +33,11 @@ public class RecipeManagerScript : MonoBehaviour
                 if(choosenMats[choosenMats.Count - 1].GetComponent<MatScript>().matCastType == SpellCtrlScript.CastType.none)
                     instruction.text = "Selected Materials: " + choosenMats[choosenMats.Count - 1].name + "\nOutcome:\nNone";
                 else
+                {
                     instruction.text = "Selected Materials: " + choosenMats[choosenMats.Count - 1].name + "\nOutcome:\n" + choosenMats[choosenMats.Count - 1].name;
+                    player.SendMessage("ChangeSpell", choosenMats[choosenMats.Count - 1]);
+                }
+
             }
         }
     }

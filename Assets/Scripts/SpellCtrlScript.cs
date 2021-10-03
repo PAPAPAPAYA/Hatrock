@@ -43,16 +43,6 @@ public class SpellCtrlScript : MonoBehaviour
 	
 	private void Update()
 	{
-		// choose cast type
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			currentCastType = CastType.projectile;
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			currentCastType = CastType.aoe;
-		}
-		
 		currentCastType = PlayerScript.me.currentMat.GetComponent<MatScript>().matCastType;
 
 		// if cast type projectile

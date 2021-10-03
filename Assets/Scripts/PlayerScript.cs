@@ -103,8 +103,9 @@ public class PlayerScript : MonoBehaviour
 		choosentMats.Add(selectedMat);
     }
 
-	public void ChangeSpel()
+	public void ChangeSpell(GameObject outcome)
     {
-		
+		currentMat = outcome;
+		Debug.Log(currentMat.name);
     }
 }
