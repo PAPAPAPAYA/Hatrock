@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5363780074866141293}
   - component: {fileID: 5363780074866141290}
-  - component: {fileID: 5363780074866141291}
+  - component: {fileID: 611036629}
   m_Layer: 0
-  m_Name: Mat A
+  m_Name: Mat A Don't Change
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5363780074866141291
+--- !u!114 &611036629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,13 +92,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5363780074866141289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 468dfa7d887cb9e499c4d273961a3c32, type: 3}
+  m_Script: {fileID: 11500000, guid: 79b8b30d4f2814b4d8f3d0c571b703f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   namae: 
-  matCastType: 4
+  matCastType: 2
   compound: 0
-  myMaterial: {fileID: 2100000, guid: 2ef49018131c6194aace04c8d001d8e8, type: 2}
+  myMaterial: {fileID: 2100000, guid: c8bf955c2a90da7449d9456458e99853, type: 2}
   myEffects:
   - damageAmount: 10
     DOT: 0
@@ -111,7 +111,11 @@ MonoBehaviour:
     HOT_interval: 0
     HOT_duration: 0
     matProduce: []
-  mass: 0.7
-  spd: 12
+  mass: 1
+  spd: 2
   aoe_distance: 4
   aoe_range: 3
+  angle: 90
+  radius: 2
+  range: 0
+  TargetSelf: 0
