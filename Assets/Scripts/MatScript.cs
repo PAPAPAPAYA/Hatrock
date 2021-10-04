@@ -18,6 +18,13 @@ public class MatScript : MonoBehaviour
     public float aoe_distance;
     public float aoe_range;
 
+    [Header("Pie")]
+    public float angle;
+    public float radius;
+
+    [Header("Target")]
+    public float range;
+
     void Update()
     {
         //Easy to test
@@ -29,5 +36,9 @@ public class MatScript : MonoBehaviour
             matCastType = SpellCtrlScript.CastType.pie;
         else if (Input.GetKeyDown(KeyCode.Alpha4))
             matCastType = SpellCtrlScript.CastType.target;
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+		{
+            matCastType = SpellCtrlScript.CastType.self;
+		}
     }
 }
