@@ -74053,8 +74053,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31df25e98a7720a4091c7256eeb4aeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiRadius: 1
-  aiTimer: 2
+  aiRadius: 5
+  aiTimer: 4
   points:
   - {fileID: 1502994579}
   - {fileID: 1697890010}
@@ -74067,9 +74067,9 @@ MonoBehaviour:
   - {fileID: 257368115}
   - {fileID: 377983469}
   spiderPoints: []
-  isSpider: 0
-  isPatrol: 1
-  randPatrol: 1
+  isSpider: 1
+  isPatrol: 0
+  randPatrol: 0
   planPatrol: 0
 --- !u!1 &1626291346
 GameObject:

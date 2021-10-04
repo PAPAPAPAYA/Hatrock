@@ -7,8 +7,7 @@ public class EnemyAI : MonoBehaviour
     //Attempt One With Random Points
     public float aiRadius;
     public float aiTimer;
-    //private Transform targetPos;
-    //private NavMeshAgent aiAgent;
+    private Transform targetPos;
     private float timer;
     
     //Attempt Two With Set Patrol Points
@@ -25,8 +24,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         selfPos = GetComponent<Transform>();
-        //aiAgent = GetComponent<NavMeshAgent>();
-        //timer = aiTimer;
+        timer = aiTimer;
         aiAgent = GetComponent<NavMeshAgent>();
         aiAgent.autoBraking = false;
         if (isPatrol)
@@ -40,27 +38,24 @@ public class EnemyAI : MonoBehaviour
     {
         // Choose the next destination point when the agent gets
         // close to the current one.
-        
-        
-            
-        /*timer += Time.deltaTime;
-        if (timer >= aiTimer)
+
+        if (isSpider)
         {
-            Vector3 newPos = RandomNavSphereTwo(transform.position, aiRadius, -1);
-            aiAgent.SetDestination(newPos);
-            timer = 0;
-        }*/
-        if (isPatrol)
-        {
-            if (!aiAgent.pathPending && aiAgent.remainingDistance < 0.5f)
+            timer += Time.deltaTime;
+            if (timer >= aiTimer)
             {
-                GotoNextPoint();
+                Vector3 newPos = RandomNavSphere(transform.position, aiRadius, -1);
+                aiAgent.SetDestination(newPos);
+                timer = 0;
+            }
+            if (isPatrol)
+            {
+                if (!aiAgent.pathPending && aiAgent.remainingDistance < 0.5f)
+                {
+                    GotoNextPoint();
+                }
             }
         }
-        
-        
-        
-        
     }
 
     public void GotoNextPoint()
@@ -85,12 +80,11 @@ public class EnemyAI : MonoBehaviour
 
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     {
-        //Vector3 randDirection = Random.insideUnitSphere * dist;
-        //randDirection += origin;
-        //NavMeshHit navHit;
-        //NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
-        //return navHit.position;
-        return Vector3.zero;
+        Vector3 randDirection = Random.insideUnitSphere * dist;
+        randDirection += origin;
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+        return navHit.position;
     }
     
     public static Vector3 SpiderGo(Vector3 origin, float dist, int layermask)
