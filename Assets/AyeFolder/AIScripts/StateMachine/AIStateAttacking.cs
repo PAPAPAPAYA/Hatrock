@@ -7,7 +7,7 @@ public class AIStateAttacking : AIStateBase
     public float AtkTimer;
     public override void StartState(Enemy myEnemy)
     {
-        myEnemy.TempAtk();
+        myEnemy.Attacking();
     }
 
     public override void Update(Enemy myEnemy)

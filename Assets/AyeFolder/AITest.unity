@@ -73862,7 +73862,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   moveSpeed: 0
-  atkSpd: 0
+  atkSpd: 2
   attack: 0
   atkRange: 3
   preAtkSpd: 2

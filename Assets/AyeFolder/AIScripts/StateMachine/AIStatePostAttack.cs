@@ -18,7 +18,7 @@ public class AIStatePostAttack : AIStateBase
         {
             if (postAtkTimer > myEnemy.postAtkSpd)
             {
-                myEnemy.myAC.ChangeState(myEnemy.myAC.preAttackState);
+                myEnemy.myAC.ChangeState(myEnemy.myAC.idleState);
             }
         }
         else if (!myEnemy.InRange())

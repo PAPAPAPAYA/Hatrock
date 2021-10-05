@@ -65,13 +65,18 @@ public class Enemy : MonoBehaviour
         ghostRider.SetDestination(target.transform.position);
     }
 
+    public void Idleing()
+    {
+        myTrigger.myMR.material.color = Origin;
+    }
     public void TempPre(float time)
     {
         myTrigger.myMR.material.color = Color.Lerp(Origin, TempAtkColor, time);
     }
-    public void TempAtk()
+    public void Attacking()
     {
         myTrigger.myMR.material.color = new Color(1, 1, 1, 1);
+        /*deal damage here*/
     }
     public void TempPost(float time)
     {
