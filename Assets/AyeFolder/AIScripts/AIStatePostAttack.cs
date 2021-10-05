@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class AIStatePostAttack : AIStateBase
 {
-    public override void StartState(AIController AC)
+    public override void StartState(Enemy myEnemy)
     {
 
     }
 
-    public override void Update(AIController AC)
+    public override void Update(Enemy myEnemy)
     {
 
     }
 
-    public override void LeaveState(AIController AC)
+    public override void LeaveState(Enemy myEnemy)
     {
 
     }

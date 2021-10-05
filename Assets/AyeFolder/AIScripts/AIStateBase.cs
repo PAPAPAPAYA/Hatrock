@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class AIStateBase
 {
  
-    public abstract void StartState(AIController AC);
+    public abstract void StartState(Enemy myEnemy);
 
-    public abstract void Update(AIController AC);
+    public abstract void Update(Enemy myEnemy);
 
-    public abstract void LeaveState(AIController AC);
+    public abstract void LeaveState(Enemy myEnemy);
 }
