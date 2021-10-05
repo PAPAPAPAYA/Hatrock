@@ -8,7 +8,8 @@ public class AIStateWalking : AIStateBase
 
     public override void StartState(Enemy myEnemy)
     {
-
+        //Debug.Log("enter Walking");
+        myEnemy.ghostRider.isStopped = false;
     }
 
     public override void Update(Enemy myEnemy)

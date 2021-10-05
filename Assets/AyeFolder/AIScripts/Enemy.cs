@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public int attack;
     public float atkRange;
     public int preAtkSpd;
+    public int atkTime;
     public int postAtkSpd;
 
     public bool hitted;
@@ -22,6 +23,11 @@ public class Enemy : MonoBehaviour
 
     public AIController myAC;
 
+    public AtkTrigger myTrigger;
+
+    public Color Origin = new Color(1, 0.5f, 0.5f, 0.3f);
+    public Color TempAtkColor = new Color(1, 0, 0, 0.3f);
+
     public enum AIPhase { NotInBattle, InBattle1, InBattle2 };
     public AIPhase phase;
 
@@ -29,6 +35,12 @@ public class Enemy : MonoBehaviour
     {
         ghostRider = GetComponent<NavMeshAgent>();
         myAC = GetComponent<AIController>();
+        myTrigger = GetComponentInChildren<AtkTrigger>();
+    }
+
+    private void Update()
+    {
+        Debug.Log(InRange());
     }
 
     public void LoseHealth(int hurtAmt)
@@ -53,9 +65,22 @@ public class Enemy : MonoBehaviour
         ghostRider.SetDestination(target.transform.position);
     }
 
+    public void TempPre(float time)
+    {
+        myTrigger.myMR.material.color = Color.Lerp(Origin, TempAtkColor, time);
+    }
+    public void TempAtk()
+    {
+        myTrigger.myMR.material.color = new Color(1, 1, 1, 1);
+    }
+    public void TempPost(float time)
+    {
+        myTrigger.myMR.material.color = Color.Lerp(TempAtkColor, Origin, time);
+    }
     public bool InRange()
     {
-        if (!ghostRider.pathPending && ghostRider.remainingDistance <= atkRange)
+        
+        if (myTrigger.onAtkTrigger)
         {
             return true;
         }

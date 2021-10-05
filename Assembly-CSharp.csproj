@@ -53,35 +53,36 @@
     <UnityVersion>2020.3.18f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\AyeFolder\AIScripts\AIStateWalking.cs" />
+    <Compile Include="Assets\AyeFolder\AIScripts\StateMachine\AIStateWalking.cs" />
     <Compile Include="Assets\Scripts\RecipeStruct.cs" />
-    <Compile Include="Assets\AyeFolder\AIScripts\AIStateHitted.cs" />
-    <Compile Include="Assets\AyeFolder\AIScripts\AIStatePreAttack.cs" />
+    <Compile Include="Assets\AyeFolder\AIScripts\StateMachine\AIStateHitted.cs" />
+    <Compile Include="Assets\AyeFolder\AIScripts\StateMachine\AIStatePreAttack.cs" />
     <Compile Include="Assets\Scripts\RecipeManagerScript.cs" />
     <Compile Include="Assets\Scripts\SpellCtrlScript.cs" />
     <Compile Include="Assets\Log.cs" />
-    <Compile Include="Assets\AyeFolder\AIScripts\AIStateBase.cs" />
-    <Compile Include="Assets\AyeFolder\AIScripts\AIStatePostAttack.cs" />
+    <Compile Include="Assets\AyeFolder\AIScripts\StateMachine\AIStateBase.cs" />
+    <Compile Include="Assets\AyeFolder\AIScripts\StateMachine\AIStatePostAttack.cs" />
     <Compile Include="Assets\Scripts\DetectionManager.cs" />
     <Compile Include="Assets\Scripts\MatScript.cs" />
     <Compile Include="Assets\HarryFolder\Scripts\PlayerController.cs" />
     <Compile Include="Assets\HarryFolder\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\AyeFolder\AIScripts\Enemy.cs" />
-    <Compile Include="Assets\AyeFolder\AIScripts\AIController.cs" />
+    <Compile Include="Assets\AyeFolder\AIScripts\StateMachine\AIController.cs" />
     <Compile Include="Assets\Scripts\CapsuleScript.cs" />
-    <Compile Include="Assets\AyeFolder\AIScripts\AIStateIdle.cs" />
+    <Compile Include="Assets\AyeFolder\AIScripts\StateMachine\AIStateIdle.cs" />
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
     <Compile Include="Assets\Scripts\MaterialManager.cs" />
     <Compile Include="Assets\Scripts\EffectManager.cs" />
     <Compile Include="Assets\HarryFolder\Scripts\GhostController.cs" />
     <Compile Include="Assets\HarryFolder\Scripts\Void.cs" />
-    <Compile Include="Assets\AyeFolder\AIScripts\AIStateAttacking.cs" />
+    <Compile Include="Assets\AyeFolder\AIScripts\StateMachine\AIStateAttacking.cs" />
     <Compile Include="Assets\Scripts\MouseManager.cs" />
     <Compile Include="Assets\Scripts\EffectStruct.cs" />
     <Compile Include="Assets\SimpleSkeleton\script\SimpleSkeletonController.cs" />
     <Compile Include="Assets\Scripts\SpellAOEScript.cs" />
     <Compile Include="Assets\HarryFolder\Scripts\SpiderController.cs" />
     <Compile Include="Assets\Scripts\SpellScript.cs" />
+    <Compile Include="Assets\AyeFolder\AIScripts\AtkTrigger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

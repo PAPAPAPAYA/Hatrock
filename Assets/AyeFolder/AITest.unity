@@ -40269,9 +40269,10 @@ GameObject:
   - component: {fileID: 895116889}
   - component: {fileID: 895116888}
   - component: {fileID: 895116887}
+  - component: {fileID: 895116893}
   m_Layer: 0
   m_Name: TestAgentInRoom
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40390,6 +40391,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &895116893
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895116886}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &895892549
 GameObject:
   m_ObjectHideFlags: 0
@@ -73847,14 +73864,18 @@ MonoBehaviour:
   moveSpeed: 0
   atkSpd: 0
   attack: 0
-  atkRange: 2.8
-  preAtkSpd: 1
-  postAtkSpd: 0
+  atkRange: 3
+  preAtkSpd: 2
+  atkTime: 1
+  postAtkSpd: 2
   hitted: 0
   interrupted: 0
   ghostRider: {fileID: 1623671491}
   target: {fileID: 895116886}
   myAC: {fileID: 0}
+  myTrigger: {fileID: 0}
+  Origin: {r: 1, g: 0.5, b: 0.5, a: 0.2}
+  TempAtkColor: {r: 1, g: 0, b: 0, a: 1}
   phase: 1
 --- !u!1 &1626291346
 GameObject:
@@ -91835,6 +91856,7 @@ GameObject:
   - component: {fileID: 2039028054}
   - component: {fileID: 2039028053}
   - component: {fileID: 2039028052}
+  - component: {fileID: 2039028055}
   m_Layer: 0
   m_Name: AtkTrigger
   m_TagString: Untagged
@@ -91850,14 +91872,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039028050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8553, z: 0}
-  m_LocalScale: {x: 4, y: 0.15766916, z: 4}
+  m_LocalPosition: {x: 0, y: -0.842, z: 0.79}
+  m_LocalScale: {x: 3.52, y: 0.15766916, z: 2.5}
   m_Children: []
   m_Father: {fileID: 1623671495}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2039028052
-CapsuleCollider:
+--- !u!64 &2039028052
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -91866,10 +91888,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &2039028053
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -91919,6 +91941,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039028050}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2039028055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039028050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62be91c9fc124049b367c6ff64a6ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAtkTrigger: 0
+  myMR: {fileID: 0}
 --- !u!43 &2049161571
 Mesh:
   m_ObjectHideFlags: 0

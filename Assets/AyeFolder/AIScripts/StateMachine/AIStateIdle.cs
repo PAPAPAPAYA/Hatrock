@@ -2,25 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIStatePreAttack : AIStateBase
+public class AIStateIdle : AIStateBase
 {
-    public float timer = 0;
     public override void StartState(Enemy myEnemy)
     {
-        Debug.Log("enter preattack");
+        //Debug.Log("enter idle");
     }
 
     public override void Update(Enemy myEnemy)
     {
-        timer += Time.fixedDeltaTime;
-        if(timer > myEnemy.preAtkSpd)
+        if(myEnemy.target != null)
         {
-            myEnemy.myAC.ChangeState(myEnemy.myAC.attackState);
+
+            myEnemy.myAC.ChangeState(myEnemy.myAC.walkingState);
         }
     }
 
     public override void LeaveState(Enemy myEnemy)
     {
-        Debug.Log(timer);
+
     }
 }
