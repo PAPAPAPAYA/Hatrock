@@ -7,14 +7,16 @@ public class AIStateIdle : AIStateBase
     public float IdleTimer;
     public override void StartState(Enemy myEnemy)
     {
-        myEnemy.Idleing();
+        
     }
 
     public override void Update(Enemy myEnemy)
     {
-        IdleTimer += Time.fixedDeltaTime;
+        
+        myEnemy.Idleing();
         if (myEnemy.InRange())
         {
+            IdleTimer += Time.fixedDeltaTime;
             if (IdleTimer > myEnemy.atkSpd)
             {
                 myEnemy.myAC.ChangeState(myEnemy.myAC.preAttackState);

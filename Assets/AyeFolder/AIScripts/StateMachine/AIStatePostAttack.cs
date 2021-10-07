@@ -14,17 +14,12 @@ public class AIStatePostAttack : AIStateBase
     {
         postAtkTimer += Time.fixedDeltaTime;//change to after animation is over
         myEnemy.TempPost(postAtkTimer);
-        if (myEnemy.InRange())
+
+        if (postAtkTimer > myEnemy.postAtkSpd)
         {
-            if (postAtkTimer > myEnemy.postAtkSpd)
-            {
-                myEnemy.myAC.ChangeState(myEnemy.myAC.idleState);
-            }
+            myEnemy.myAC.ChangeState(myEnemy.myAC.idleState);
         }
-        else if (!myEnemy.InRange())
-        {
-            myEnemy.myAC.ChangeState(myEnemy.myAC.walkingState);
-        }
+
     }
 
     public override void LeaveState(Enemy myEnemy)
