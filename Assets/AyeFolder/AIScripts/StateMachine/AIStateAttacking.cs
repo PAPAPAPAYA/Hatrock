@@ -7,7 +7,7 @@ public class AIStateAttacking : AIStateBase
     public float AtkTimer;
     public override void StartState(Enemy myEnemy)
     {
-        myEnemy.myTrigger.myMR.enabled = true;
+        
     }
 
     public override void Update(Enemy myEnemy)
