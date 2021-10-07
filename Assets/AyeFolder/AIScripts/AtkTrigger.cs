@@ -18,7 +18,7 @@ public class AtkTrigger : MonoBehaviour
         {
             Debug.Log(other.gameObject.name);
             onAtkTrigger = true;
-            myMR.enabled = true;
+            //myMR.enabled = true;
         }
     }
 
@@ -28,7 +28,7 @@ public class AtkTrigger : MonoBehaviour
         {
             
             onAtkTrigger = false;
-            myMR.enabled = false;
+            //myMR.enabled = false;
         }
     }
 

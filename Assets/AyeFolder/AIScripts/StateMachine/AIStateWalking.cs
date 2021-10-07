@@ -9,6 +9,7 @@ public class AIStateWalking : AIStateBase
     public override void StartState(Enemy myEnemy)
     {
         //Debug.Log("enter Walking");
+        myEnemy.myTrigger.myMR.enabled = false;
         myEnemy.ghostRider.isStopped = false;
     }
 

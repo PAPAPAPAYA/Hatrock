@@ -8,23 +8,20 @@ public class AIStatePreAttack : AIStateBase
     public override void StartState(Enemy myEnemy)
     {
         //Debug.Log("enter preattack");
+        myEnemy.myTrigger.myMR.enabled = true;
     }
 
     public override void Update(Enemy myEnemy)
     {
         preAtkTimer += Time.fixedDeltaTime;//change to after animation is over
         myEnemy.TempPre(preAtkTimer);
-        if (myEnemy.InRange())
+
+        if (preAtkTimer > myEnemy.preAtkSpd)
         {
-            if (preAtkTimer > myEnemy.preAtkSpd)
-            {
-                myEnemy.myAC.ChangeState(myEnemy.myAC.attackState);
-            }
+            myEnemy.myAC.ChangeState(myEnemy.myAC.attackState);
         }
-        else if (!myEnemy.InRange())
-        {
-            myEnemy.myAC.ChangeState(myEnemy.myAC.walkingState);
-        }
+        
+
         
         
     }
