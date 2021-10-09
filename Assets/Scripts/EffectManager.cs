@@ -42,6 +42,10 @@ public class EffectManager : MonoBehaviour
 		if (effect.myCtrlType != CtrlTypes.none)
 		{
 			print(target.name + " will be in " + effect.myCtrlType.ToString() + " state for " + effect.ctrl_duration + "s");
+			if (effect.myCtrlType == CtrlTypes.forceMove)
+			{
+				// knock back based on amount
+			}
 		}
 	}
 
@@ -64,5 +68,11 @@ public class EffectManager : MonoBehaviour
 			print("healed " + target.name + " " + effect.healAmount);
 			target.GetComponent<PlayerScript>().hp += effect.healAmount;
 		}
+	}
+
+	public void KnockBack(float amount, GameObject er, GameObject ee)
+	{
+		Vector3 dir = ee.transform.position - er.transform.position;
+		ee.GetComponent<Rigidbody>().AddForce(dir.normalized * amount, ForceMode.Impulse);
 	}
 }
