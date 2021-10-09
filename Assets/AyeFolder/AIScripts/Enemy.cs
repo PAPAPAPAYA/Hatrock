@@ -77,6 +77,7 @@ public class Enemy : MonoBehaviour
     {
         myTrigger.myMR.material.color = new Color(1, 1, 1, 1);
         /*deal damage here*/
+        EffectManager.me.KnockBack(2, gameObject, PlayerScript.me.gameObject);
     }
     public void TempPost(float time)
     {
