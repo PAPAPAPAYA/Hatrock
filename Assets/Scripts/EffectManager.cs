@@ -45,6 +45,21 @@ public class EffectManager : MonoBehaviour
 			if (effect.myCtrlType == CtrlTypes.forceMove)
 			{
 				// knock back based on amount
+				KnockBack(effect.knockback_amount, PlayerScript.me.gameObject, target);
+			}
+			if (effect.myCtrlType == CtrlTypes.cantAttack)
+			{
+				if (target.GetComponent<Enemy>() != null)
+				{
+					target.GetComponent<Enemy>().attackable = false;
+				}
+			}
+			if (effect.myCtrlType == CtrlTypes.cantWalk)
+			{
+				if (target.GetComponent<Enemy>() != null)
+				{
+					target.GetComponent<Enemy>().walkable = false;
+				}
 			}
 		}
 	}

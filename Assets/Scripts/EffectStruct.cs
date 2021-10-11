@@ -14,6 +14,7 @@ public struct EffectStruct
     [Header("CTRL")]
     public EffectManager.CtrlTypes myCtrlType;
     public float ctrl_duration;
+    public float knockback_amount;
 
     [Header("RECOV")]
     public float healAmount;
