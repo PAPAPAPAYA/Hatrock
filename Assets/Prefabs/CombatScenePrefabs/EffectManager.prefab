@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703aadcf322d24c4a81ea67c4a3221d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droppedMat_flyAmount: 3
