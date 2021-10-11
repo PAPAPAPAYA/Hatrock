@@ -64,6 +64,13 @@
 	// xput combat into level
 // foce move
 	// ximpulse knock back
-	// knock back enemy
+	// xknock back enemy
 	// xknock back player
+// walkability
+	// xcombat part
+	// ai part
+// attackability
+	// xcombat part
+	// ai part
+// xdropping supply (simple)
 	
