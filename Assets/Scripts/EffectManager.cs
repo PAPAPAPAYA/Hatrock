@@ -5,7 +5,7 @@ using UnityEngine;
 public class EffectManager : MonoBehaviour
 {
 	public static EffectManager me;
-	public GameObject dropped_mat_prefab;
+	public float droppedMat_flyAmount;
 
 	public enum CtrlTypes
 	{
@@ -76,7 +76,13 @@ public class EffectManager : MonoBehaviour
 			if (effect.dropMat)
 			{
 				print(target.name + " dropped " + matDropped.name);
-				Instantiate(matDropped, target.transform.position, Quaternion.identity);
+				Vector3 spawnPos = new Vector3(target.transform.position.x, target.transform.position.y + 0.7f, target.transform.position.z);
+				GameObject droppedMat = Instantiate(matDropped, spawnPos, Quaternion.identity);
+				droppedMat.GetComponent<Rigidbody>().AddForce(
+					new Vector3(Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount), 
+					3, 
+					Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount)), 
+					ForceMode.Impulse);
 			}
 		}
 	}
