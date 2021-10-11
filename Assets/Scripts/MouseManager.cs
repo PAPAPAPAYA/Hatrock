@@ -27,7 +27,7 @@ public class MouseManager : MonoBehaviour
         RaycastHit rayHit = new RaycastHit();
 
         // STEP 3: debug draw the raycast
-        Debug.DrawRay(mouseRay.origin, mouseRay.direction * mouseRayDist, Color.magenta);
+        Debug.DrawRay(mouseRay.origin, mouseRay.direction * mouseRayDist, Color.yellow);
 
         // STEP 4: shoot the raycast
         if (Physics.Raycast(mouseRay, out rayHit, mouseRayDist, ~ignoreMe))

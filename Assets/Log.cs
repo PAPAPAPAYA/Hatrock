@@ -58,3 +58,19 @@
 		// hot
 	// xsupply
 		// xdrop mats
+
+// 10/9/21
+// xcombination
+	// xput combat into level
+// foce move
+	// ximpulse knock back
+	// xknock back enemy
+	// xknock back player
+// walkability
+	// xcombat part
+	// ai part
+// attackability
+	// xcombat part
+	// ai part
+// xdropping supply (simple)
+	

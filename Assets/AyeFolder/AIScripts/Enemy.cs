@@ -31,6 +31,10 @@ public class Enemy : MonoBehaviour
     public enum AIPhase { NotInBattle, InBattle1, InBattle2 };
     public AIPhase phase;
 
+    // ctrl
+    public bool attackable;
+    public bool walkable;
+
     private void Awake()
     {
         ghostRider = GetComponent<NavMeshAgent>();
@@ -77,6 +81,7 @@ public class Enemy : MonoBehaviour
     {
         myTrigger.myMR.material.color = new Color(1, 1, 1, 1);
         /*deal damage here*/
+        EffectManager.me.KnockBack(2, gameObject, PlayerScript.me.gameObject);
     }
     public void TempPost(float time)
     {
