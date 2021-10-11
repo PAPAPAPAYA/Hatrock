@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SpellCtrlScript : MonoBehaviour
 {
+	public PlayerScript ps;
+
 	[Header("PROJECTILE")]
     public Transform spellSpawnLoc;
     public GameObject spell_proj_prefab;
@@ -24,36 +26,30 @@ public class SpellCtrlScript : MonoBehaviour
 
 	[Header("TARGET")]
 	public GameObject targetIndicator;
-	
 
+	[Header("Self")]
+	public GameObject selfIndicator;
+	
 	public enum CastType
 	{
 		none,
 		projectile,
 		aoe,
 		pie,
-		target
+		target,
+		self
 	};
 	public CastType currentCastType;
 
 	private void Start()
 	{
 		aoeOgColor = aoeRangeIndicator.GetComponent<SpriteRenderer>().color;
+		ps = gameObject.GetComponent<PlayerScript>();
 		//pieRangeIndicator.GetComponent<SpriteRenderer>().color = aoeOgColor;
 	}
 	
 	private void Update()
 	{
-		// choose cast type
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			currentCastType = CastType.projectile;
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			currentCastType = CastType.aoe;
-		}
-		
 		currentCastType = PlayerScript.me.currentMat.GetComponent<MatScript>().matCastType;
 
 		// if cast type projectile
@@ -62,6 +58,7 @@ public class SpellCtrlScript : MonoBehaviour
 			aoeRangeIndicator.SetActive(false);
 			pieRangeIndicator.SetActive(false);
 			targetIndicator.SetActive(false);
+			selfIndicator.SetActive(false);
 
 			if (Input.GetMouseButtonDown(0))
 			{
@@ -75,6 +72,7 @@ public class SpellCtrlScript : MonoBehaviour
 			aoeRangeIndicator.SetActive(true);
 			pieRangeIndicator.SetActive(false);
 			targetIndicator.SetActive(false);
+			selfIndicator.SetActive(false);
 
 			// get aoe params from current material
 			aoeRadius = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_range;
@@ -112,6 +110,7 @@ public class SpellCtrlScript : MonoBehaviour
 			aoeRangeIndicator.SetActive(false);
 			pieRangeIndicator.SetActive(true);
 			targetIndicator.SetActive(false);
+			selfIndicator.SetActive(false);
 
 			pieRangeIndicator.GetComponent<Image>().fillAmount = 1f / 360f * pieAngle;
 			Quaternion targetAngle = Quaternion.Euler(0, 0, pieAngle / 2 - 180f);
@@ -126,9 +125,10 @@ public class SpellCtrlScript : MonoBehaviour
         {
 			aoeRangeIndicator.SetActive(false);
 			pieRangeIndicator.SetActive(false);
+			selfIndicator.SetActive(false);
 
 			//if selected enemy, then show the indicator
-            if (MouseManager.me.slctedEnemy)
+			if (MouseManager.me.enemySelected != null)
             {
 				targetIndicator.SetActive(true);
                 if (Input.GetMouseButtonDown(0))
@@ -136,7 +136,8 @@ public class SpellCtrlScript : MonoBehaviour
 					targetIndicator.GetComponent<Light>().color = new Color(0, 159, 179, 1);
 					//! insert effect codes here
 					print("hit enemy with target");
-                }
+					EffectManager.me.ProcessEffects(gameObject.GetComponent<PlayerScript>().currentMat, MouseManager.me.enemySelected);
+				}
 				if(Input.GetMouseButtonUp(0))
 					targetIndicator.GetComponent<Light>().color = new Color(255, 255, 255, 1);
 			}
@@ -145,6 +146,31 @@ public class SpellCtrlScript : MonoBehaviour
 				targetIndicator.SetActive(false);
             }
         }
+		else if(currentCastType == CastType.self)
+		{
+			aoeRangeIndicator.SetActive(false);
+			pieRangeIndicator.SetActive(false);
+			targetIndicator.SetActive(false);
+			selfIndicator.SetActive(true);
+
+			if (Input.GetMouseButtonDown(0))
+            {
+				selfIndicator.GetComponent<Light>().color = new Color(0, 159, 179, 1);
+			}
+			//! effect goes here
+			if (Input.GetMouseButtonUp(0))
+			{
+				EffectManager.me.ProcessEffects(ps.currentMat, ps.gameObject);
+				selfIndicator.GetComponent<Light>().color = new Color(59, 190, 55, 1);
+			}
+		}
+        else
+        {
+			Debug.Log("I am none");
+			aoeRangeIndicator.SetActive(false);
+			pieRangeIndicator.SetActive(false);
+			targetIndicator.SetActive(false);
+		}
 	}
 
 	private IEnumerator ChangeToDefaultColor(GameObject indicator)
@@ -160,6 +186,7 @@ public class SpellCtrlScript : MonoBehaviour
 		//spell.GetComponent<Rigidbody>().mass = PlayerScript.me.currentMat.GetComponent<MatScript>().mass;
 		spell.GetComponent<Rigidbody>().mass = PlayerScript.me.currentMat.GetComponent<MatScript>().mass;
 		spell.GetComponent<Rigidbody>().AddForce(spellSpawnLoc.transform.forward * spellSpd, ForceMode.Impulse);
+		spell.GetComponent<SpellScript>().mat = gameObject.GetComponent<PlayerScript>().currentMat;
 	}
 
 	private void SpawnSpell_aoe() // spawn a collider
@@ -167,6 +194,7 @@ public class SpellCtrlScript : MonoBehaviour
 		GameObject aoeSpell = Instantiate(spell_AOE_prefab);
 		aoeSpell.transform.position = aoeRangeIndicator.transform.position;
 		aoeSpell.transform.localScale = new Vector3(aoeRadius, 2f, aoeRadius);
+		aoeSpell.GetComponent<SpellAOEScript>().mat = gameObject.GetComponent<PlayerScript>().currentMat;
 	}
 
 	private void SpawnSpell_pie() // check if enemy in pie
@@ -180,6 +208,7 @@ public class SpellCtrlScript : MonoBehaviour
 				if (Vector3.Angle(transform.forward, tempV3 - transform.position) < pieAngle / 2)
 				{
 					//! insert effect here
+					EffectManager.me.ProcessEffects(gameObject.GetComponent<PlayerScript>().currentMat, collider.gameObject);
 					print("hit enemy with pie");
 				}
 				else

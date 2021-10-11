@@ -41,3 +41,29 @@
 		// xfind place to insert effect codes
 	// xtarget
 		// xfind place to insert effect codes
+
+// 10/3/21
+// adjustments
+	// xnew .gitignore
+	// xget current mat in hit detection and call effect from effect manager based on the mat's effects
+	// xdamage
+		// xone time damage
+		// dot
+	// xctrl
+		// xwalkability
+		// xatackability
+		// foece move
+	// xrecovery
+		// xone time heal
+		// hot
+	// xsupply
+		// xdrop mats
+
+// 10/9/21
+// xcombination
+	// xput combat into level
+// foce move
+	// ximpulse knock back
+	// knock back enemy
+	// xknock back player
+	

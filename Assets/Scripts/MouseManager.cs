@@ -8,6 +8,7 @@ public class MouseManager : MonoBehaviour
     public Vector3 mousePos;
     public LayerMask ignoreMe;
     public bool slctedEnemy = false;
+    public GameObject enemySelected;
 
 	private void Awake()
 	{
@@ -26,7 +27,7 @@ public class MouseManager : MonoBehaviour
         RaycastHit rayHit = new RaycastHit();
 
         // STEP 3: debug draw the raycast
-        Debug.DrawRay(mouseRay.origin, mouseRay.direction * mouseRayDist, Color.magenta);
+        Debug.DrawRay(mouseRay.origin, mouseRay.direction * mouseRayDist, Color.yellow);
 
         // STEP 4: shoot the raycast
         if (Physics.Raycast(mouseRay, out rayHit, mouseRayDist, ~ignoreMe))
@@ -37,10 +38,12 @@ public class MouseManager : MonoBehaviour
             if(rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 slctedEnemy = true;
+                enemySelected = rayHit.transform.gameObject;
             }
             else
             {
                 slctedEnemy = false;
+                enemySelected = null;
             }
         }
     }
