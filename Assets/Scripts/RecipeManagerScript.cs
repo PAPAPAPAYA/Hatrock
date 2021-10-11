@@ -9,6 +9,11 @@ public class RecipeManagerScript : MonoBehaviour
     public GameObject player;
     public TextMeshProUGUI instruction;
     public TextMeshProUGUI combination;
+    public TextMeshProUGUI match;
+    public TextMeshProUGUI argyi;
+    public TextMeshProUGUI nail;
+    public TextMeshProUGUI tear;
+    public TextMeshProUGUI cotton;
     
     public List<GameObject> possibleCombinations;
 
@@ -19,22 +24,24 @@ public class RecipeManagerScript : MonoBehaviour
             if(CompareList(i, choosenMats))
             {
                 player.SendMessage("ChangeSpell", recipeList[i].Outcome);
-                instruction.text = "Selected Materials: ";
+                instruction.text = "";
+                /*instruction.text = "Selected Materials: ";
                 foreach (var mat in recipeList[i].Materials)
                 {
                     instruction.text += mat.name + "\n";
                 }
-                instruction.text += "\nOutcome:\n" + recipeList[i].Outcome.name;
+                */
+                instruction.text += "Outcome:\n" + recipeList[i].Outcome.name;
                 return;
             }
             if(i == recipeList.Count - 1)
             {
                 player.SendMessage("RefreshChoosenMats");
                 if(choosenMats[choosenMats.Count - 1].GetComponent<MatScript>().matCastType == SpellCtrlScript.CastType.none)
-                    instruction.text = "Selected Materials: " + choosenMats[choosenMats.Count - 1].name + "\nOutcome:\nNone";
+                    instruction.text = /*"Selected Materials: " + choosenMats[choosenMats.Count - 1].name + */"Outcome:\nNone";
                 else
                 {
-                    instruction.text = "Selected Materials: " + choosenMats[choosenMats.Count - 1].name + "\nOutcome:\n" + choosenMats[choosenMats.Count - 1].name;
+                    instruction.text = /*"Selected Materials: " + choosenMats[choosenMats.Count - 1].name + */"Outcome:\n" + choosenMats[choosenMats.Count - 1].name;
                 }
                 player.SendMessage("ChangeSpell", choosenMats[choosenMats.Count - 1]);
             }
@@ -44,7 +51,12 @@ public class RecipeManagerScript : MonoBehaviour
     public void SearchForCombinations(List<GameObject> matList)
     {
         possibleCombinations.Clear();
-        combination.text = "Possible Combination:\n";
+        match.color = new Color32(255, 255, 255, 255);
+        argyi.color = new Color32(255, 255, 255, 255);
+        nail.color = new Color32(255, 255, 255, 255);
+        tear.color = new Color32(255, 255, 255, 255);
+        cotton.color = new Color32(255, 255, 255, 255);
+        //combination.text = "Possible Combination:\n";
         for (int i = 0; i < recipeList.Count; i++) 
         {
             if (ContainsList(i, matList))
@@ -57,6 +69,16 @@ public class RecipeManagerScript : MonoBehaviour
                 {
                     for (int d = 0; d < matList.Count; d++)
                     {
+                        if (matList[d].name == "Match")
+                            match.color = new Color32(87, 212, 197, 255);
+                        if (matList[d].name == "Argyi")
+                            argyi.color = new Color32(87, 212, 197, 255);
+                        if (matList[d].name == "Copper Nail")
+                            nail.color = new Color32(87, 212, 197, 255);
+                        if (matList[d].name == "Demon May Cry")
+                            tear.color = new Color32(87, 212, 197, 255);
+                        if (matList[d].name == "Demon Mat B")
+                            cotton.color = new Color32(87, 212, 197, 255);
                         if (possibleCombinations[c] == matList[d])
                         {
                             possibleCombinations.RemoveAt(c);
@@ -67,7 +89,17 @@ public class RecipeManagerScript : MonoBehaviour
         }
         foreach (var mat in possibleCombinations)
         {
-            combination.text += mat.name + "\n";
+            //combination.text += mat.name + "\n";
+            if (mat.name == "Match")
+                match.color = new Color32(215, 140, 90, 255);
+            if (mat.name == "Argyi")
+                argyi.color = new Color32(215, 140, 90, 255);
+            if (mat.name == "Copper Nail")
+                nail.color = new Color32(215, 140, 90, 255);
+            if (mat.name == "Demon May Cry")
+                tear.color = new Color32(215, 140, 90, 255);
+            if (mat.name == "Demon Mat B")
+                cotton.color = new Color32(215, 140, 90, 255);
         }
     }
     

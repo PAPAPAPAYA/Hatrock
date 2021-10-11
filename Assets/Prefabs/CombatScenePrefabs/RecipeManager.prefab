@@ -94,7 +94,7 @@ MonoBehaviour:
     - {fileID: 8441474695682364324, guid: 212051402683f614781bcf259e7847f1, type: 3}
     RequiredAmout: 0100000001000000
     Outcome: {fileID: 7385027715785288007, guid: 430ddac43904a9249b46273311ea90a4, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 199564424747727129, guid: 227da076e12dbfa4b990f022b9a9dc8e, type: 3}
   instruction: {fileID: 0}
   combination: {fileID: 0}
   possibleCombinations: []
