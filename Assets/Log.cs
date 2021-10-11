@@ -72,4 +72,5 @@
 // attackability
 	// xcombat part
 	// ai part
+// xdropping supply (simple)
 	

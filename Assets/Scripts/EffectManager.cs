@@ -5,6 +5,8 @@ using UnityEngine;
 public class EffectManager : MonoBehaviour
 {
 	public static EffectManager me;
+	public GameObject dropped_mat_prefab;
+
 	public enum CtrlTypes
 	{
 		none,
@@ -52,6 +54,7 @@ public class EffectManager : MonoBehaviour
 				if (target.GetComponent<Enemy>() != null)
 				{
 					target.GetComponent<Enemy>().attackable = false;
+					StartCoroutine(ResetAttackability(effect.ctrl_duration, target));
 				}
 			}
 			if (effect.myCtrlType == CtrlTypes.cantWalk)
@@ -59,6 +62,7 @@ public class EffectManager : MonoBehaviour
 				if (target.GetComponent<Enemy>() != null)
 				{
 					target.GetComponent<Enemy>().walkable = false;
+					StartCoroutine(ResetMoveability(effect.ctrl_duration, target));
 				}
 			}
 		}
@@ -72,6 +76,7 @@ public class EffectManager : MonoBehaviour
 			if (effect.dropMat)
 			{
 				print(target.name + " dropped " + matDropped.name);
+				Instantiate(matDropped, target.transform.position, Quaternion.identity);
 			}
 		}
 	}
@@ -89,5 +94,37 @@ public class EffectManager : MonoBehaviour
 	{
 		Vector3 dir = ee.transform.position - er.transform.position;
 		ee.GetComponent<Rigidbody>().AddForce(dir.normalized * amount, ForceMode.Impulse);
+	}
+
+	IEnumerator ResetAttackability(float duration, GameObject target)
+	{
+		float timer = 0f;
+		while (timer < duration)
+		{
+			print(timer);
+			timer += Time.deltaTime;
+			yield return null;
+		}
+		if (target.GetComponent<Enemy>() != null &&
+			timer >= duration)
+		{
+			target.GetComponent<Enemy>().attackable = true;
+		}
+	}
+
+	IEnumerator ResetMoveability(float duration, GameObject target)
+	{
+		float timer = 0f;
+		while (timer < duration)
+		{
+			print(timer);
+			timer += Time.deltaTime;
+			yield return null;
+		}
+		if (target.GetComponent<Enemy>() != null &&
+			timer >= duration)
+		{
+			target.GetComponent<Enemy>().walkable = true;
+		}
 	}
 }
