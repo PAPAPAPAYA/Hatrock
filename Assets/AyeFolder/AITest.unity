@@ -57574,6 +57574,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Target Indicator
       objectReference: {fileID: 0}
+    - target: {fileID: 8612859531622332435, guid: 2ebfc20b2017a02408dbc6dfca6e4bea, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ebfc20b2017a02408dbc6dfca6e4bea, type: 3}
 --- !u!4 &1300697612 stripped
@@ -74386,9 +74390,9 @@ GameObject:
   - component: {fileID: 1623671496}
   - component: {fileID: 1623671491}
   - component: {fileID: 1623671489}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bear
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74537,6 +74541,8 @@ MonoBehaviour:
   Origin: {r: 1, g: 0.5, b: 0.5, a: 0.2}
   TempAtkColor: {r: 1, g: 0, b: 0, a: 1}
   phase: 1
+  attackable: 0
+  walkable: 0
 --- !u!1 &1626291346
 GameObject:
   m_ObjectHideFlags: 0
@@ -92737,7 +92743,7 @@ GameObject:
   - component: {fileID: 2039028053}
   - component: {fileID: 2039028052}
   - component: {fileID: 2039028055}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AtkTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
