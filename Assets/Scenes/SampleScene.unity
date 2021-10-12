@@ -1028,6 +1028,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EffectManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2174258576397472078, guid: 57d520f0554298648be9d1affdcfbf69, type: 3}
+      propertyPath: droppedMat_flyAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2174258576397472079, guid: 57d520f0554298648be9d1affdcfbf69, type: 3}
       propertyPath: m_RootOrder
       value: 15

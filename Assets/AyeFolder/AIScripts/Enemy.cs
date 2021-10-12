@@ -31,6 +31,9 @@ public class Enemy : MonoBehaviour
     public enum AIPhase { NotInBattle, InBattle1, InBattle2 };
     public AIPhase phase;
 
+    public bool attackable;
+    public bool walkable;
+
     private void Awake()
     {
         ghostRider = GetComponent<NavMeshAgent>();
