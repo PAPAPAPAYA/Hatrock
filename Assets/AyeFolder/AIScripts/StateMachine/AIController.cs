@@ -13,7 +13,7 @@ public class AIController : MonoBehaviour
     public AIStateBase preAttackState = new AIStatePreAttack();
     public AIStateBase attackState = new AIStateAttacking();
     public AIStateBase postAttackState = new AIStatePostAttack();
-    public AIStateBase hittedState = new AIStateHitted();
+    public AIStateBase dieState = new AIStateDie();
 
 
     public void ChangeState(AIStateBase newState)

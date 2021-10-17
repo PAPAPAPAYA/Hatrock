@@ -35,6 +35,6 @@ public class AIStatePreAttack : AIStateBase
     public override void LeaveState(Enemy myEnemy)
     {
         preAtkTimer = 0;
-        Debug.Log(preAtkTimer);
+        
     }
 }

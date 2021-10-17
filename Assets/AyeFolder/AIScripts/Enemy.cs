@@ -45,6 +45,15 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         Debug.Log(InRange());
+        AIDead();
+    }
+
+    public void AIDead()
+    {
+        if (health <= 0)
+        {
+            myAC.ChangeState(myAC.dieState);
+        }
     }
 
     public void LoseHealth(int hurtAmt)
@@ -73,7 +82,12 @@ public class Enemy : MonoBehaviour
     {
         if(InRange())
         {
+            myTrigger.myMR.enabled = true;
             myTrigger.myMR.material.color = Origin;
+        }
+        if(!InRange())
+        {
+            myTrigger.myMR.enabled = false;
         }
         if(!walkable || !attackable)
         {
@@ -102,7 +116,7 @@ public class Enemy : MonoBehaviour
     {
         myTrigger.myMR.material.color = Color.Lerp(Origin, TempAtkColor, time);
     }
-    public void Attacking()
+    public void KnowckBackAtk()
     {
         myTrigger.myMR.material.color = new Color(1, 1, 1, 1);
         /*deal damage here*/
@@ -111,6 +125,12 @@ public class Enemy : MonoBehaviour
             EffectManager.me.KnockBack(2, gameObject, PlayerScript.me.gameObject);
         }
     }
+
+    public void SoundWaveAtk()
+    {
+
+    }
+
     public void TempPost(float time)
     {
         myTrigger.myMR.material.color = Color.Lerp(TempAtkColor, Origin, time);

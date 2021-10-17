@@ -15,7 +15,7 @@ public class AIStateAttacking : AIStateBase
         if (myEnemy.attackable)
         {
             AtkTimer += Time.fixedDeltaTime;//change to after animation is over
-            myEnemy.Attacking();
+            myEnemy.KnowckBackAtk();
             if (AtkTimer > myEnemy.atkTime)
             {
                 myEnemy.myAC.ChangeState(myEnemy.myAC.postAttackState);
