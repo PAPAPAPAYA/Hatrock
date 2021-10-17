@@ -6,10 +6,12 @@ public class PlayerScript : MonoBehaviour
 {
 	static public PlayerScript me;
 	public float spd;
+	public float rot_spd;
 	public float hp;
 	public GameObject currentMat;
 	public GameObject recipeManager;
 	private GameObject selectedMat;
+	
 	//Temp inventory
 	[Header("Temp Inventory")]
 	public List<GameObject> tempInventory;
@@ -23,45 +25,79 @@ public class PlayerScript : MonoBehaviour
 	private void Update()
 	{
 		// simple movement for now
+		//if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+		//{
+		//	transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - spd * Time.deltaTime);
+		//}
+		//else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+		//{
+		//	transform.position = new Vector3(transform.position.x - spd * Time.deltaTime, transform.position.y, transform.position.z);
+		//}
+		//else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+		//{
+		//	transform.position = new Vector3(transform.position.x + spd * Time.deltaTime, transform.position.y, transform.position.z);
+		//}
+		//else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+		//{
+		//	transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + spd * Time.deltaTime);
+		//}
+		//else if (Input.GetKey(KeyCode.W))
+		//{
+		//	transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+		//}
+		//else if (Input.GetKey(KeyCode.S))
+		//{
+		//	transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+		//}
+		//else if (Input.GetKey(KeyCode.A))
+		//{
+		//	transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+		//}
+		//else if (Input.GetKey(KeyCode.D))
+		//{
+		//	transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+		//}
 		if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
-		{
-			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - spd * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-		{
-			transform.position = new Vector3(transform.position.x - spd * Time.deltaTime, transform.position.y, transform.position.z);
-		}
-		else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
-		{
-			transform.position = new Vector3(transform.position.x + spd * Time.deltaTime, transform.position.y, transform.position.z);
-		}
-		else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
-		{
-			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + spd * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.W))
-		{
-			transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.S))
-		{
-			transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.A))
-		{
-			transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.D))
 		{
 			transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
 		}
-		
+		else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+		{
+			transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+		}
+		else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+		{
+			transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+		}
+		else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+		{
+			transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+		}
+		else if (Input.GetKey(KeyCode.W))
+		{
+			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + spd * Time.deltaTime);
+		}
+		else if (Input.GetKey(KeyCode.S))
+		{
+			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z -spd * Time.deltaTime);
+		}
+		else if (Input.GetKey(KeyCode.A))
+		{
+			transform.position = new Vector3(transform.position.x - spd * Time.deltaTime, transform.position.y, transform.position.z);
+		}
+		else if (Input.GetKey(KeyCode.D))
+		{
+			transform.position = new Vector3(transform.position.x + spd * Time.deltaTime, transform.position.y, transform.position.z);
+		}
+
 
 		// look at mouse pos(not changing y-axis)
-		transform.LookAt(new Vector3(MouseManager.me.mousePos.x, transform.position.y, MouseManager.me.mousePos.z));
+		//transform.LookAt(new Vector3(MouseManager.me.mousePos.x, transform.position.y, MouseManager.me.mousePos.z));
+		var target = new Vector3(MouseManager.me.mousePos.x, transform.position.y, MouseManager.me.mousePos.z);
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), rot_spd * Time.deltaTime);
 
 		// select mat
-		if (Input.GetKeyDown(KeyCode.Z))
+		if (Input.GetKeyDown(KeyCode.Alpha1))
         {
 			if (tempInventory[0] != null)
             {
@@ -72,7 +108,7 @@ public class PlayerScript : MonoBehaviour
 			}
 
         }
-		else if (Input.GetKeyDown(KeyCode.X))
+		else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
 			if (tempInventory[1] != null)
             {
@@ -82,7 +118,7 @@ public class PlayerScript : MonoBehaviour
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
         }
-		else if (Input.GetKeyDown(KeyCode.C))
+		else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
 			if (tempInventory[2] != null)
             {
@@ -92,7 +128,7 @@ public class PlayerScript : MonoBehaviour
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
         }
-		else if (Input.GetKeyDown(KeyCode.V))
+		else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
 			if(tempInventory[3] != null)
             {
@@ -102,7 +138,7 @@ public class PlayerScript : MonoBehaviour
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
         }
-		else if (Input.GetKeyDown(KeyCode.B))
+		else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
 			if(tempInventory[4] != null)
             {
