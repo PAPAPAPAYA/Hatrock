@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(InRange());
+        Debug.Log("InRange(): "+InRange());
     }
 
     public void LoseHealth(int hurtAmt)
