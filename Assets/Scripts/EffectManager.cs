@@ -5,6 +5,8 @@ using UnityEngine;
 public class EffectManager : MonoBehaviour
 {
 	public static EffectManager me;
+	public float droppedMat_flyAmount;
+
 	public enum CtrlTypes
 	{
 		none,
@@ -45,6 +47,23 @@ public class EffectManager : MonoBehaviour
 			if (effect.myCtrlType == CtrlTypes.forceMove)
 			{
 				// knock back based on amount
+				KnockBack(effect.knockback_amount, PlayerScript.me.gameObject, target);
+			}
+			if (effect.myCtrlType == CtrlTypes.cantAttack)
+			{
+				if (target.GetComponent<Enemy>() != null)
+				{
+					target.GetComponent<Enemy>().attackable = false;
+					StartCoroutine(ResetAttackability(effect.ctrl_duration, target));
+				}
+			}
+			if (effect.myCtrlType == CtrlTypes.cantWalk)
+			{
+				if (target.GetComponent<Enemy>() != null)
+				{
+					target.GetComponent<Enemy>().walkable = false;
+					StartCoroutine(ResetMoveability(effect.ctrl_duration, target));
+				}
 			}
 		}
 	}
@@ -57,6 +76,13 @@ public class EffectManager : MonoBehaviour
 			if (effect.dropMat)
 			{
 				print(target.name + " dropped " + matDropped.name);
+				Vector3 spawnPos = new Vector3(target.transform.position.x, target.transform.position.y + 0.7f, target.transform.position.z);
+				GameObject droppedMat = Instantiate(matDropped, spawnPos, Quaternion.identity);
+				droppedMat.GetComponent<Rigidbody>().AddForce(
+					new Vector3(Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount), 
+					3, 
+					Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount)), 
+					ForceMode.Impulse);
 			}
 		}
 	}
@@ -74,5 +100,37 @@ public class EffectManager : MonoBehaviour
 	{
 		Vector3 dir = ee.transform.position - er.transform.position;
 		ee.GetComponent<Rigidbody>().AddForce(dir.normalized * amount, ForceMode.Impulse);
+	}
+
+	IEnumerator ResetAttackability(float duration, GameObject target)
+	{
+		float timer = 0f;
+		while (timer < duration)
+		{
+			print(timer);
+			timer += Time.deltaTime;
+			yield return null;
+		}
+		if (target.GetComponent<Enemy>() != null &&
+			timer >= duration)
+		{
+			target.GetComponent<Enemy>().attackable = true;
+		}
+	}
+
+	IEnumerator ResetMoveability(float duration, GameObject target)
+	{
+		float timer = 0f;
+		while (timer < duration)
+		{
+			print(timer);
+			timer += Time.deltaTime;
+			yield return null;
+		}
+		if (target.GetComponent<Enemy>() != null &&
+			timer >= duration)
+		{
+			target.GetComponent<Enemy>().walkable = true;
+		}
 	}
 }
