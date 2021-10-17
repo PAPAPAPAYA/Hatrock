@@ -33,9 +33,14 @@ public class EffectManager : MonoBehaviour
 
 	public void DoDamage(GameObject target, EffectStruct effect)
 	{
-		if (effect.damageAmount > 0)
+		if (target.tag == "Enemy" && effect.damageAmount > 0)
 		{
 			print("dealt " + effect.damageAmount + " damage to " + target.name);
+		}
+
+        if (effect.DOT)
+        {
+			StartCoroutine(DoDOT(effect, target));
 		}
 	}
 
@@ -94,6 +99,11 @@ public class EffectManager : MonoBehaviour
 			print("healed " + target.name + " " + effect.healAmount);
 			target.GetComponent<PlayerScript>().hp += effect.healAmount;
 		}
+
+        if (effect.HOT)
+        {
+			StartCoroutine(DoHOT(effect, target));
+        }
 	}
 
 	public void KnockBack(float amount, GameObject er, GameObject ee)
@@ -131,6 +141,39 @@ public class EffectManager : MonoBehaviour
 			timer >= duration)
 		{
 			target.GetComponent<Enemy>().walkable = true;
+		}
+	}
+
+	IEnumerator DoDOT(EffectStruct effect, GameObject target)
+    {
+		int timer = 1;
+		yield return new WaitForSeconds(1f);
+		while(timer <= effect.DOT_duration)
+        {
+			timer += 1;
+			print("dealt " + effect.DOT_interval + " DOT damage to " + target.name);
+			yield return new WaitForSeconds(1f);
+		}
+		if(timer > effect.DOT_duration)
+        {
+			StopCoroutine(DoDOT(effect, target));
+        }
+    }
+
+	IEnumerator DoHOT(EffectStruct effect, GameObject target)
+	{
+		int timer = 1;
+		yield return new WaitForSeconds(1f);
+		while (timer <= effect.HOT_duration)
+		{
+			timer += 1;
+			print("healed " + effect.HOT_interval + " HOT HP to " + target.name);
+			target.GetComponent<PlayerScript>().hp += effect.HOT_interval;
+			yield return new WaitForSeconds(1f);
+		}
+		if (timer > effect.HOT_duration)
+		{
+			StopCoroutine(DoHOT(effect, target));
 		}
 	}
 }

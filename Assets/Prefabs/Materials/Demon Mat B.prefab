@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: matCastType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 611036629, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
+      propertyPath: myEffects.Array.data[0].damageAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5363780074866141289, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
       propertyPath: m_Name
       value: Demon Mat B
