@@ -74429,7 +74429,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623671488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 3, z: -5.5}
+  m_LocalPosition: {x: 17.2, y: 1.2, z: 64.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2039028051}
@@ -74449,7 +74449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba89d365c2835c4e831b7673416b539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 40
   maxHealth: 0
   moveSpeed: 0
   atkSpd: 2
@@ -74467,8 +74467,8 @@ MonoBehaviour:
   Origin: {r: 1, g: 0.5, b: 0.5, a: 0.2}
   TempAtkColor: {r: 1, g: 0, b: 0, a: 1}
   phase: 1
-  attackable: 0
-  walkable: 0
+  attackable: 1
+  walkable: 1
 --- !u!1 &1626291346
 GameObject:
   m_ObjectHideFlags: 0
@@ -74904,6 +74904,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EffectManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2174258576397472078, guid: 57d520f0554298648be9d1affdcfbf69, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1623671488}
     - target: {fileID: 2174258576397472079, guid: 57d520f0554298648be9d1affdcfbf69, type: 3}
       propertyPath: m_RootOrder
       value: 13
