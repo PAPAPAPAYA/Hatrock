@@ -102,13 +102,14 @@ public class EffectManager : MonoBehaviour
 
 	public void Heal(GameObject target, EffectStruct effect)
 	{
+		print("I am debugging healing");
 		if (target.GetComponent<PlayerScript>() != null && effect.healAmount > 0)
 		{
 			print("healed " + target.name + " " + effect.healAmount);
 			target.GetComponent<PlayerScript>().hp += effect.healAmount;
 		}
 
-        if (target.GetComponent<PlayerScript>() != null && effect.HOT)
+        if (effect.HOT)
         {
 			StartCoroutine(DoHOT(effect, target));
         }

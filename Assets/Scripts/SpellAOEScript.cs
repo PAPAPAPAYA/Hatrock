@@ -10,12 +10,12 @@ public class SpellAOEScript : MonoBehaviour
 	void Update()
 	{
 		// destroy it after 3 seconds
-		Destroy(gameObject, 3);
+		Destroy(gameObject, 0.5f);
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("Enemy"))
+		if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
 		{
 			// !effect here
 			EffectManager.me.ProcessEffects(mat, other.gameObject);
