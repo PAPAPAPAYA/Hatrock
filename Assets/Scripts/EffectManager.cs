@@ -6,6 +6,8 @@ public class EffectManager : MonoBehaviour
 {
 	public static EffectManager me;
 	public float droppedMat_flyAmount;
+	public GameObject enemy;
+	public Enemy enemyScript;
 
 	public enum CtrlTypes
 	{
@@ -20,7 +22,12 @@ public class EffectManager : MonoBehaviour
 		me = this;
 	}
 
-	public void ProcessEffects(GameObject mat, GameObject target)
+    private void Start()
+    {
+		enemyScript = enemy.GetComponent<Enemy>();
+    }
+
+    public void ProcessEffects(GameObject mat, GameObject target)
 	{
 		foreach (var effect in mat.GetComponent<MatScript>().myEffects)
 		{
@@ -36,9 +43,10 @@ public class EffectManager : MonoBehaviour
 		if (target.tag == "Enemy" && effect.damageAmount > 0)
 		{
 			print("dealt " + effect.damageAmount + " damage to " + target.name);
+			enemyScript.LoseHealth(effect.damageAmount);
 		}
 
-        if (effect.DOT)
+        if (target.tag == "Enemy" && effect.DOT)
         {
 			StartCoroutine(DoDOT(effect, target));
 		}
@@ -100,7 +108,7 @@ public class EffectManager : MonoBehaviour
 			target.GetComponent<PlayerScript>().hp += effect.healAmount;
 		}
 
-        if (effect.HOT)
+        if (target.GetComponent<PlayerScript>() != null && effect.HOT)
         {
 			StartCoroutine(DoHOT(effect, target));
         }
@@ -152,6 +160,7 @@ public class EffectManager : MonoBehaviour
         {
 			timer += 1;
 			print("dealt " + effect.DOT_interval + " DOT damage to " + target.name);
+			enemyScript.LoseHealth((int)effect.DOT_interval);
 			yield return new WaitForSeconds(1f);
 		}
 		if(timer > effect.DOT_duration)
