@@ -81,6 +81,8 @@
      <Compile Include="Assets\AyeFolder\AIScripts\AtkTrigger.cs" />
      <Compile Include="Assets\HarryFolder\Scripts\SpiderController.cs" />
      <Compile Include="Assets\Scripts\SpellScript.cs" />
+     <Compile Include="Assets\HarryFolder\Scripts\Kids.cs" />
+     <Compile Include="Assets\HarryFolder\Scripts\MotherController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
