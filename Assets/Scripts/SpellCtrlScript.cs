@@ -50,127 +50,131 @@ public class SpellCtrlScript : MonoBehaviour
 	
 	private void Update()
 	{
-		currentCastType = PlayerScript.me.currentMat.GetComponent<MatScript>().matCastType;
-
-		// if cast type projectile
-		if (currentCastType == CastType.projectile)
+		if (PlayerScript.me.currentMat != null)
 		{
-			aoeRangeIndicator.SetActive(false);
-			pieRangeIndicator.SetActive(false);
-			targetIndicator.SetActive(false);
-			selfIndicator.SetActive(false);
-
-			if (Input.GetMouseButtonDown(0))
+			currentCastType = PlayerScript.me.currentMat.GetComponent<MatScript>().matCastType;
+			// if cast type projectile
+			if (currentCastType == CastType.projectile)
 			{
-				SpawnSpell_proj();
+				aoeRangeIndicator.SetActive(false);
+				pieRangeIndicator.SetActive(false);
+				targetIndicator.SetActive(false);
+				selfIndicator.SetActive(false);
+
+				if (Input.GetMouseButtonDown(0))
+				{
+					SpawnSpell_proj();
+				}
 			}
-		}
-		// if cast type aoe
-		else if (currentCastType == CastType.aoe)
-		{
-			// show range
-			aoeRangeIndicator.SetActive(true);
-			pieRangeIndicator.SetActive(false);
-			targetIndicator.SetActive(false);
-			selfIndicator.SetActive(false);
-
-			// get aoe params from current material
-			aoeRadius = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_range;
-			aoeDistance = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_distance;
-
-			// change indicator range according to spell range
-			aoeRangeIndicator.transform.localScale = new Vector3(aoeRadius / 15, aoeRadius / 15, 1);
-			//aoeRangeIndicator.GetComponent<Light>().spotAngle = aoeRadius;
-
-			// restrict distance
-			float dist = Vector3.Distance(MouseManager.me.mousePos, transform.position);
-			if (dist > aoeDistance)
+			// if cast type aoe
+			else if (currentCastType == CastType.aoe)
 			{
-				Vector3 fromOriginToObject = MouseManager.me.mousePos - transform.position;
-				fromOriginToObject *= aoeDistance;
-				fromOriginToObject /= dist;
-				aoeRangeIndicator.transform.position = transform.position + fromOriginToObject;
-				aoeRangeIndicator.transform.position = new Vector3(aoeRangeIndicator.transform.position.x, .1f, aoeRangeIndicator.transform.position.z);
+				// show range
+				aoeRangeIndicator.SetActive(true);
+				pieRangeIndicator.SetActive(false);
+				targetIndicator.SetActive(false);
+				selfIndicator.SetActive(false);
+
+				// get aoe params from current material
+				aoeRadius = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_range;
+				aoeDistance = PlayerScript.me.currentMat.GetComponent<MatScript>().aoe_distance;
+
+				// change indicator range according to spell range
+				aoeRangeIndicator.transform.localScale = new Vector3(aoeRadius / 15, aoeRadius / 15, 1);
+				//aoeRangeIndicator.GetComponent<Light>().spotAngle = aoeRadius;
+
+				// restrict distance
+				float dist = Vector3.Distance(MouseManager.me.mousePos, transform.position);
+				if (dist > aoeDistance)
+				{
+					Vector3 fromOriginToObject = MouseManager.me.mousePos - transform.position;
+					fromOriginToObject *= aoeDistance;
+					fromOriginToObject /= dist;
+					aoeRangeIndicator.transform.position = transform.position + fromOriginToObject;
+					aoeRangeIndicator.transform.position = new Vector3(aoeRangeIndicator.transform.position.x, .1f, aoeRangeIndicator.transform.position.z);
+				}
+				else
+				{
+					aoeRangeIndicator.transform.position = new Vector3(MouseManager.me.mousePos.x, .1f, MouseManager.me.mousePos.z);
+				}
+
+				// cast the spell
+				if (Input.GetMouseButtonDown(0))
+				{
+					//aoeRangeIndicator.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
+					//StartCoroutine(ChangeToDefaultColor(aoeRangeIndicator));
+					SpawnSpell_aoe();
+				}
+			}
+			else if (currentCastType == CastType.pie)
+			{
+				aoeRangeIndicator.SetActive(false);
+				pieRangeIndicator.SetActive(true);
+				targetIndicator.SetActive(false);
+				selfIndicator.SetActive(false);
+
+				pieRangeIndicator.GetComponent<Image>().fillAmount = 1f / 360f * pieAngle;
+				Quaternion targetAngle = Quaternion.Euler(0, 0, pieAngle / 2 - 180f);
+				pieRangeIndicator.GetComponent<RectTransform>().localRotation = targetAngle;
+
+				if (Input.GetMouseButtonDown(0))
+				{
+					SpawnSpell_pie();
+				}
+			}
+			else if (currentCastType == CastType.target)
+			{
+				aoeRangeIndicator.SetActive(false);
+				pieRangeIndicator.SetActive(false);
+				selfIndicator.SetActive(false);
+
+				//if selected enemy, then show the indicator
+				if (MouseManager.me.enemySelected != null)
+				{
+					targetIndicator.SetActive(true);
+					if (Input.GetMouseButtonDown(0))
+					{
+						targetIndicator.GetComponent<Light>().color = new Color(0, 159, 179, 1);
+						//! insert effect codes here
+						print("hit enemy with target");
+						EffectManager.me.ProcessEffects(gameObject.GetComponent<PlayerScript>().currentMat, MouseManager.me.enemySelected);
+					}
+					if (Input.GetMouseButtonUp(0))
+						targetIndicator.GetComponent<Light>().color = new Color(255, 255, 255, 1);
+				}
+				else
+				{
+					targetIndicator.SetActive(false);
+				}
+			}
+			else if (currentCastType == CastType.self)
+			{
+				aoeRangeIndicator.SetActive(false);
+				pieRangeIndicator.SetActive(false);
+				targetIndicator.SetActive(false);
+				selfIndicator.SetActive(true);
+
+				if (Input.GetMouseButtonDown(0))
+				{
+					selfIndicator.GetComponent<Light>().color = new Color(0, 159, 179, 1);
+				}
+				//! effect goes here
+				if (Input.GetMouseButtonUp(0))
+				{
+					EffectManager.me.ProcessEffects(ps.currentMat, ps.gameObject);
+					selfIndicator.GetComponent<Light>().color = new Color(59, 190, 55, 1);
+				}
 			}
 			else
 			{
-				aoeRangeIndicator.transform.position = new Vector3(MouseManager.me.mousePos.x, .1f, MouseManager.me.mousePos.z);
-			}
-			
-			// cast the spell
-			if (Input.GetMouseButtonDown(0))
-			{
-				//aoeRangeIndicator.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
-				//StartCoroutine(ChangeToDefaultColor(aoeRangeIndicator));
-				SpawnSpell_aoe();
-			}
-		}
-		else if(currentCastType == CastType.pie)
-        {
-			aoeRangeIndicator.SetActive(false);
-			pieRangeIndicator.SetActive(true);
-			targetIndicator.SetActive(false);
-			selfIndicator.SetActive(false);
-
-			pieRangeIndicator.GetComponent<Image>().fillAmount = 1f / 360f * pieAngle;
-			Quaternion targetAngle = Quaternion.Euler(0, 0, pieAngle / 2 - 180f);
-			pieRangeIndicator.GetComponent<RectTransform>().localRotation = targetAngle;
-
-            if (Input.GetMouseButtonDown(0))
-            {
-				SpawnSpell_pie();
-			}
-        }
-		else if(currentCastType == CastType.target)
-        {
-			aoeRangeIndicator.SetActive(false);
-			pieRangeIndicator.SetActive(false);
-			selfIndicator.SetActive(false);
-
-			//if selected enemy, then show the indicator
-			if (MouseManager.me.enemySelected != null)
-            {
-				targetIndicator.SetActive(true);
-                if (Input.GetMouseButtonDown(0))
-                {
-					targetIndicator.GetComponent<Light>().color = new Color(0, 159, 179, 1);
-					//! insert effect codes here
-					print("hit enemy with target");
-					EffectManager.me.ProcessEffects(gameObject.GetComponent<PlayerScript>().currentMat, MouseManager.me.enemySelected);
-				}
-				if(Input.GetMouseButtonUp(0))
-					targetIndicator.GetComponent<Light>().color = new Color(255, 255, 255, 1);
-			}
-            else
-            {
+				Debug.Log("I am none");
+				aoeRangeIndicator.SetActive(false);
+				pieRangeIndicator.SetActive(false);
 				targetIndicator.SetActive(false);
-            }
-        }
-		else if(currentCastType == CastType.self)
-		{
-			aoeRangeIndicator.SetActive(false);
-			pieRangeIndicator.SetActive(false);
-			targetIndicator.SetActive(false);
-			selfIndicator.SetActive(true);
+			}
+		}
 
-			if (Input.GetMouseButtonDown(0))
-            {
-				selfIndicator.GetComponent<Light>().color = new Color(0, 159, 179, 1);
-			}
-			//! effect goes here
-			if (Input.GetMouseButtonUp(0))
-			{
-				EffectManager.me.ProcessEffects(ps.currentMat, ps.gameObject);
-				selfIndicator.GetComponent<Light>().color = new Color(59, 190, 55, 1);
-			}
-		}
-        else
-        {
-			Debug.Log("I am none");
-			aoeRangeIndicator.SetActive(false);
-			pieRangeIndicator.SetActive(false);
-			targetIndicator.SetActive(false);
-		}
+		
 	}
 
 	private IEnumerator ChangeToDefaultColor(GameObject indicator)
