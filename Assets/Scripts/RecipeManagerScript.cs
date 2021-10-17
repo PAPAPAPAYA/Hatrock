@@ -69,11 +69,11 @@ public class RecipeManagerScript : MonoBehaviour
                 {
                     for (int d = 0; d < matList.Count; d++)
                     {
-                        if (matList[d].name == "Match")
+                        if (matList[d].name == "Match - Low Damage Bullet")
                             match.color = new Color32(87, 212, 197, 255);
-                        if (matList[d].name == "Argyi")
+                        if (matList[d].name == "Argyi - Self Healing")
                             argyi.color = new Color32(87, 212, 197, 255);
-                        if (matList[d].name == "Copper Nail")
+                        if (matList[d].name == "Copper Nail - Drop Material Bullet")
                             nail.color = new Color32(87, 212, 197, 255);
                         if (matList[d].name == "Demon May Cry")
                             tear.color = new Color32(87, 212, 197, 255);
@@ -90,11 +90,11 @@ public class RecipeManagerScript : MonoBehaviour
         foreach (var mat in possibleCombinations)
         {
             //combination.text += mat.name + "\n";
-            if (mat.name == "Match")
+            if (mat.name == "Match - Low Damage Bullet")
                 match.color = new Color32(215, 140, 90, 255);
-            if (mat.name == "Argyi")
+            if (mat.name == "Argyi - Self Healing")
                 argyi.color = new Color32(215, 140, 90, 255);
-            if (mat.name == "Copper Nail")
+            if (mat.name == "Copper Nail - Drop Material Bullet")
                 nail.color = new Color32(215, 140, 90, 255);
             if (mat.name == "Demon May Cry")
                 tear.color = new Color32(215, 140, 90, 255);
