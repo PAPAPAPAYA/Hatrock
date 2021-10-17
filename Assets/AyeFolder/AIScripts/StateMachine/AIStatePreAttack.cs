@@ -13,17 +13,23 @@ public class AIStatePreAttack : AIStateBase
 
     public override void Update(Enemy myEnemy)
     {
-        preAtkTimer += Time.fixedDeltaTime;//change to after animation is over
-        myEnemy.TempPre(preAtkTimer);
-
-        if (preAtkTimer > myEnemy.preAtkSpd)
+        if (myEnemy.attackable)
         {
-            myEnemy.myAC.ChangeState(myEnemy.myAC.attackState);
-        }
-        
+            preAtkTimer += Time.fixedDeltaTime;//change to after animation is over
+            myEnemy.TempPre(preAtkTimer);
 
-        
-        
+            if (preAtkTimer > myEnemy.preAtkSpd)
+            {
+                myEnemy.myAC.ChangeState(myEnemy.myAC.attackState);
+            }
+
+        }
+        else if (!myEnemy.attackable)
+        {
+            myEnemy.myAC.ChangeState(myEnemy.myAC.idleState);
+        }
+
+
     }
 
     public override void LeaveState(Enemy myEnemy)

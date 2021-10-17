@@ -32,6 +32,7 @@ public class AIController : MonoBehaviour
 
     }
 
+
     private void Awake()
     {
         currentState = idleState;

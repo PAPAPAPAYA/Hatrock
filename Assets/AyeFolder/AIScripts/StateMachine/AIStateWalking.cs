@@ -8,20 +8,31 @@ public class AIStateWalking : AIStateBase
 
     public override void StartState(Enemy myEnemy)
     {
-        //Debug.Log("enter Walking");
         myEnemy.myTrigger.myMR.enabled = false;
         myEnemy.ghostRider.isStopped = false;
     }
 
     public override void Update(Enemy myEnemy)
     {
-        myEnemy.ChaseTarget();
-        if (myEnemy.phase != Enemy.AIPhase.NotInBattle)
+
+        if (myEnemy.walkable)
         {
-            if(myEnemy.InRange())
+            myEnemy.ChaseTarget();
+            if (myEnemy.InRange())
             {
-                myEnemy.myAC.ChangeState(myEnemy.myAC.preAttackState);
+                if (myEnemy.attackable)
+                {
+                    myEnemy.myAC.ChangeState(myEnemy.myAC.preAttackState);
+                }
+                else if (!myEnemy.attackable)
+                {
+                    myEnemy.myAC.ChangeState(myEnemy.myAC.idleState);
+                }
             }
+        }
+        else if(!myEnemy.walkable)
+        {
+            myEnemy.myAC.ChangeState(myEnemy.myAC.idleState);
         }
     }
 

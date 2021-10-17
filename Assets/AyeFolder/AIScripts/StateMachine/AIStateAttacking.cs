@@ -12,13 +12,20 @@ public class AIStateAttacking : AIStateBase
 
     public override void Update(Enemy myEnemy)
     {
-        AtkTimer += Time.fixedDeltaTime;//change to after animation is over
-        myEnemy.Attacking();
-        if (AtkTimer > myEnemy.atkTime)
+        if (myEnemy.attackable)
         {
-            myEnemy.myAC.ChangeState(myEnemy.myAC.postAttackState);
+            AtkTimer += Time.fixedDeltaTime;//change to after animation is over
+            myEnemy.Attacking();
+            if (AtkTimer > myEnemy.atkTime)
+            {
+                myEnemy.myAC.ChangeState(myEnemy.myAC.postAttackState);
+            }
         }
-        
+        else if (!myEnemy.attackable)
+        {
+            myEnemy.myAC.ChangeState(myEnemy.myAC.idleState);
+        }
+
 
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,9 +15,6 @@ public class Enemy : MonoBehaviour
     public int preAtkSpd;
     public int atkTime;
     public int postAtkSpd;
-
-    public bool hitted;
-    public bool interrupted;
 
     public NavMeshAgent ghostRider;
     public GameObject target;
@@ -34,11 +32,14 @@ public class Enemy : MonoBehaviour
     public bool attackable;
     public bool walkable;
 
+    public TextMeshProUGUI hittedStates;
+
     private void Awake()
     {
         ghostRider = GetComponent<NavMeshAgent>();
         myAC = GetComponent<AIController>();
         myTrigger = GetComponentInChildren<AtkTrigger>();
+        health = maxHealth;
     }
 
     private void Update()
@@ -70,7 +71,32 @@ public class Enemy : MonoBehaviour
 
     public void Idleing()
     {
-        myTrigger.myMR.material.color = Origin;
+        if(InRange())
+        {
+            myTrigger.myMR.material.color = Origin;
+        }
+        if(!walkable || !attackable)
+        {
+            if(!walkable)
+            { 
+                hittedStates.text = "cant walk"; 
+            }
+            if (!attackable)
+            {
+                hittedStates.text = "cant attack";
+            }
+
+        }
+        if(!walkable && !attackable)
+        {
+            hittedStates.text = "cant anything";
+        }
+
+        if(walkable && attackable)
+        {
+            hittedStates.text = "";
+        }
+
     }
     public void TempPre(float time)
     {
@@ -80,7 +106,10 @@ public class Enemy : MonoBehaviour
     {
         myTrigger.myMR.material.color = new Color(1, 1, 1, 1);
         /*deal damage here*/
-        EffectManager.me.KnockBack(2, gameObject, PlayerScript.me.gameObject);
+        if (InRange())
+        {
+            EffectManager.me.KnockBack(2, gameObject, PlayerScript.me.gameObject);
+        }
     }
     public void TempPost(float time)
     {
