@@ -61,7 +61,7 @@ public class PlayerScript : MonoBehaviour
 		transform.LookAt(new Vector3(MouseManager.me.mousePos.x, transform.position.y, MouseManager.me.mousePos.z));
 
 		// select mat
-		if (Input.GetKeyDown(KeyCode.Z))
+		if (Input.GetKeyDown(KeyCode.Alpha1))
         {
 			if (tempInventory[0] != null)
             {
@@ -72,7 +72,7 @@ public class PlayerScript : MonoBehaviour
 			}
 
         }
-		else if (Input.GetKeyDown(KeyCode.X))
+		else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
 			if (tempInventory[1] != null)
             {
@@ -82,7 +82,7 @@ public class PlayerScript : MonoBehaviour
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
         }
-		else if (Input.GetKeyDown(KeyCode.C))
+		else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
 			if (tempInventory[2] != null)
             {
@@ -92,7 +92,7 @@ public class PlayerScript : MonoBehaviour
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
         }
-		else if (Input.GetKeyDown(KeyCode.V))
+		else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
 			if(tempInventory[3] != null)
             {
@@ -102,7 +102,7 @@ public class PlayerScript : MonoBehaviour
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
         }
-		else if (Input.GetKeyDown(KeyCode.B))
+		else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
 			if(tempInventory[4] != null)
             {
