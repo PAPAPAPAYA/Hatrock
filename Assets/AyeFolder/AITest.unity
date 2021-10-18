@@ -74567,7 +74567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623671488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 3, z: -5.5}
+  m_LocalPosition: {x: 17.2, y: 1.2, z: 64.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2039028051}
@@ -75042,6 +75042,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EffectManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2174258576397472078, guid: 57d520f0554298648be9d1affdcfbf69, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1623671488}
     - target: {fileID: 2174258576397472079, guid: 57d520f0554298648be9d1affdcfbf69, type: 3}
       propertyPath: m_RootOrder
       value: 13
