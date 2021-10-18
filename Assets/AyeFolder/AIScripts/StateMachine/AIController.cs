@@ -47,6 +47,5 @@ public class AIController : MonoBehaviour
     void Update()
     {
         currentState.Update(myEnemy);
-        Debug.Log(currentState);
     }
 }

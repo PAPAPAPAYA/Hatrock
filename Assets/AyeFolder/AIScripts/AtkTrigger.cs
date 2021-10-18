@@ -7,10 +7,6 @@ public class AtkTrigger : MonoBehaviour
     public bool onAtkTrigger = false;
     public MeshRenderer myMR;
 
-    private void Awake()
-    {
-        myMR = GetComponent<MeshRenderer>();
-    }
 
     private void OnTriggerEnter(Collider other)
     {

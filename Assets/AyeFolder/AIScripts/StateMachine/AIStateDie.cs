@@ -8,8 +8,7 @@ public class AIStateDie : AIStateBase
     public override void StartState(Enemy myEnemy)
     {
         myEnemy.myTrigger.myMR.enabled = false;
-        myEnemy.walkable = false;
-        myEnemy.attackable = false;
+
     }
 
     public override void Update(Enemy myEnemy)

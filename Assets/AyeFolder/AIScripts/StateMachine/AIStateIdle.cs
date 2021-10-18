@@ -12,10 +12,11 @@ public class AIStateIdle : AIStateBase
 
     public override void Update(Enemy myEnemy)
     {
+        myEnemy.Idleing();
 
         if (myEnemy.InRange())
         {
-            myEnemy.Idleing();
+            
             if (myEnemy.attackable)
             {
                 IdleTimer += Time.fixedDeltaTime;
@@ -26,7 +27,7 @@ public class AIStateIdle : AIStateBase
             }
             else if (!myEnemy.attackable)
             {
-                myEnemy.Idleing();
+                
             }
         }
         else if (!myEnemy.InRange())
@@ -37,7 +38,7 @@ public class AIStateIdle : AIStateBase
             }
             else if (!myEnemy.walkable)
             {
-                myEnemy.Idleing();
+               
             }
 
         }

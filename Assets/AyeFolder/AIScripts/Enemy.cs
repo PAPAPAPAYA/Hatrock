@@ -6,46 +6,70 @@ using TMPro;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("BASIC")]
     public int health;
     public int maxHealth;
     public int moveSpeed;
     public int atkSpd;
     public int attack;
-    public float atkRange;
     public int preAtkSpd;
     public int atkTime;
     public int postAtkSpd;
 
-    public NavMeshAgent ghostRider;
-    public GameObject target;
-
     public AIController myAC;
-
-    public AtkTrigger myTrigger;
-
-    public Color Origin = new Color(1, 0.5f, 0.5f, 0.3f);
-    public Color TempAtkColor = new Color(1, 0, 0, 0.3f);
-
     public enum AIPhase { NotInBattle, InBattle1, InBattle2 };
     public AIPhase phase;
 
+    [Header("NAV MESH")]
+    public NavMeshAgent ghostRider;
+    public GameObject target;
+
+
+    [Header("ATTACK")]
+    public AtkTrigger myTrigger;
+    public GameObject myTriggerObj;
+    public Color Origin = new Color(1, 0.5f, 0.5f, 0.3f);
+    public Color TempAtkColor = new Color(1, 0, 0, 0.3f);
+
+    [Header("HITTED CTRL")]
     public bool attackable;
     public bool walkable;
-
     public TextMeshProUGUI hittedStates;
 
     private void Awake()
     {
         ghostRider = GetComponent<NavMeshAgent>();
-        myAC = GetComponent<AIController>();
-        myTrigger = GetComponentInChildren<AtkTrigger>();
+        myAC = GetComponent<AIController>();  
         health = maxHealth;
+        PhaseChange();
     }
 
     private void Update()
     {
-        Debug.Log(InRange());
+        HittedStatesIndication();
         AIDead();
+        PhaseChange();
+    }
+
+    public void PhaseChange()
+    {
+        if(phase == AIPhase.InBattle1)
+        {
+            atkSpd = 2;
+            preAtkSpd = 2;
+            atkTime = 1;
+            postAtkSpd = 2;
+            myTriggerObj = GameObject.Find("Atk1Trigger");
+        }
+        else if (phase == AIPhase.InBattle2)
+        {
+            atkSpd = 5;
+            preAtkSpd = 7;
+            atkTime = 1;
+            postAtkSpd = 3;
+            myTriggerObj = GameObject.Find("Atk2Trigger");
+        }
+        myTrigger = myTriggerObj.GetComponent<AtkTrigger>();
     }
 
     public void AIDead()
@@ -89,52 +113,74 @@ public class Enemy : MonoBehaviour
         {
             myTrigger.myMR.enabled = false;
         }
-        if(!walkable || !attackable)
+
+    }
+    public void HittedStatesIndication()
+    {
+        if (myAC.currentState != myAC.dieState)
         {
-            if(!walkable)
-            { 
-                hittedStates.text = "cant walk"; 
-            }
-            if (!attackable)
+            if (walkable && attackable == false)
             {
                 hittedStates.text = "cant attack";
             }
+            else if (attackable && walkable == false)
+            {
+                hittedStates.text = "cant walk";
+            }
+            else if (!walkable && !attackable)
+            {
+                hittedStates.text = "cant anything";
+            }
 
-        }
-        if(!walkable && !attackable)
-        {
-            hittedStates.text = "cant anything";
-        }
+            else if (walkable && attackable)
+            {
+                hittedStates.text = "";
 
-        if(walkable && attackable)
-        {
-            hittedStates.text = "";
+            }
         }
-
     }
     public void TempPre(float time)
     {
         myTrigger.myMR.material.color = Color.Lerp(Origin, TempAtkColor, time);
-    }
-    public void KnowckBackAtk()
-    {
-        myTrigger.myMR.material.color = new Color(1, 1, 1, 1);
-        /*deal damage here*/
-        if (InRange())
-        {
-            EffectManager.me.KnockBack(2, gameObject, PlayerScript.me.gameObject);
-        }
-    }
-
-    public void SoundWaveAtk()
-    {
-
     }
 
     public void TempPost(float time)
     {
         myTrigger.myMR.material.color = Color.Lerp(TempAtkColor, Origin, time);
     }
+    public void KnowckBackAtk()
+    {
+        myTrigger.myMR.material.color = new Color(1, 1, 1, 1);
+        
+        if (InRange())
+        {
+            EffectManager.me.KnockBack(100, gameObject, PlayerScript.me.gameObject);
+            /*deal damage here*/
+        }
+
+    }
+
+    public void SoundWaveAtk()
+    {
+        myTrigger.myMR.material.color = new Color(0, 0.5f, 1, 1);
+        float dmgRange = 8;
+        float soundWaveDmg = 8 - dmgRange; //can change later
+
+        if (AIToPlayerDist() <= dmgRange)
+        {
+            Debug.Log("player in dmg range");
+            /*deal damage here*/
+            /*apply DOT to player here*/
+        }
+
+    }
+
+    public float AIToPlayerDist()
+    {
+
+        return Vector3.Distance(transform.position, target.transform.position);
+    }
+
     public bool InRange()
     {
         
