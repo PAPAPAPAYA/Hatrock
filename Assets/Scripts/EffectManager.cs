@@ -117,6 +117,7 @@ public class EffectManager : MonoBehaviour
 
 	public void KnockBack(float amount, GameObject er, GameObject ee)
 	{
+		Debug.Log("this is knockback");
 		Vector3 dir = ee.transform.position - er.transform.position;
 		ee.GetComponent<Rigidbody>().AddForce(dir.normalized * amount, ForceMode.Impulse);
 	}
@@ -126,7 +127,7 @@ public class EffectManager : MonoBehaviour
 		float timer = 0f;
 		while (timer < duration)
 		{
-			print(timer);
+			//print(timer);
 			timer += Time.deltaTime;
 			yield return null;
 		}
