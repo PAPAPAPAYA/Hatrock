@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
 	static public PlayerScript me;
+	private Animator myAnim;
 	public float spd;
 	public float rot_spd;
 	public float hp;
@@ -20,6 +21,7 @@ public class PlayerScript : MonoBehaviour
 	private void Awake()
 	{
 		me = this;
+		myAnim = GetComponent<Animator>();
 	}
 
 	private void Update()
@@ -57,39 +59,41 @@ public class PlayerScript : MonoBehaviour
 		//{
 		//	transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
 		//}
-		if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+		if (myAnim.GetCurrentAnimatorStateInfo(0).IsName("testIdle"))
 		{
-			transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+			if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+			{
+				transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+			}
+			else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+			{
+				transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+			}
+			else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+			{
+				transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+			}
+			else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+			{
+				transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
+			}
+			else if (Input.GetKey(KeyCode.W))
+			{
+				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + spd * Time.deltaTime);
+			}
+			else if (Input.GetKey(KeyCode.S))
+			{
+				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - spd * Time.deltaTime);
+			}
+			else if (Input.GetKey(KeyCode.A))
+			{
+				transform.position = new Vector3(transform.position.x - spd * Time.deltaTime, transform.position.y, transform.position.z);
+			}
+			else if (Input.GetKey(KeyCode.D))
+			{
+				transform.position = new Vector3(transform.position.x + spd * Time.deltaTime, transform.position.y, transform.position.z);
+			}
 		}
-		else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-		{
-			transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
-		{
-			transform.position = new Vector3(transform.position.x - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
-		{
-			transform.position = new Vector3(transform.position.x + Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime, transform.position.y, transform.position.z - Mathf.Sqrt(Mathf.Pow(spd, 2) / 2) * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.W))
-		{
-			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + spd * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.S))
-		{
-			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z -spd * Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.A))
-		{
-			transform.position = new Vector3(transform.position.x - spd * Time.deltaTime, transform.position.y, transform.position.z);
-		}
-		else if (Input.GetKey(KeyCode.D))
-		{
-			transform.position = new Vector3(transform.position.x + spd * Time.deltaTime, transform.position.y, transform.position.z);
-		}
-
 
 		// look at mouse pos(not changing y-axis)
 		//transform.LookAt(new Vector3(MouseManager.me.mousePos.x, transform.position.y, MouseManager.me.mousePos.z));

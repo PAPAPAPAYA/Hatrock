@@ -73,7 +73,7 @@
 		// xaccumulated, not instant
 		// xui
 	// skill cast system change
-		// windup and backswing
+		// xwindup and backswing
 		// GP
 		// deal damage visual tell
 	

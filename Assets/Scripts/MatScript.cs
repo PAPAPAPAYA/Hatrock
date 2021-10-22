@@ -25,6 +25,10 @@ public class MatScript : MonoBehaviour
     [Header("Target")]
     public float range;
 
+    [Header("Stun")]
+    public float windup;
+    public float backswing;
+
     void Update()
     {
         //Easy to test

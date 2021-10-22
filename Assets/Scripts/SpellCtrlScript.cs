@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SpellCtrlScript : MonoBehaviour
 {
 	public PlayerScript ps;
+	public Animator playerAnim;
 
 	[Header("PROJECTILE")]
     public Transform spellSpawnLoc;
@@ -45,6 +46,7 @@ public class SpellCtrlScript : MonoBehaviour
 	{
 		aoeOgColor = aoeRangeIndicator.GetComponent<SpriteRenderer>().color;
 		ps = gameObject.GetComponent<PlayerScript>();
+		playerAnim = GetComponent<Animator>();
 		//pieRangeIndicator.GetComponent<SpriteRenderer>().color = aoeOgColor;
 	}
 	
@@ -63,7 +65,12 @@ public class SpellCtrlScript : MonoBehaviour
 
 				if (Input.GetMouseButtonDown(0))
 				{
-					SpawnSpell_proj();
+					GameObject mat = PlayerScript.me.currentMat;
+					float windup = mat.GetComponent<MatScript>().windup;
+					float backswing = mat.GetComponent<MatScript>().backswing;
+					//SpawnSpell_proj(); // should be called in animator
+					playerAnim.Play("testWindup");
+					//StartCoroutine(SpawnSpell_proj(windup));
 				}
 			}
 			// if cast type aoe
@@ -104,6 +111,7 @@ public class SpellCtrlScript : MonoBehaviour
 					//aoeRangeIndicator.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
 					//StartCoroutine(ChangeToDefaultColor(aoeRangeIndicator));
 					SpawnSpell_aoe();
+
 				}
 			}
 			else if (currentCastType == CastType.pie)
@@ -191,6 +199,26 @@ public class SpellCtrlScript : MonoBehaviour
 		spell.GetComponent<Rigidbody>().mass = PlayerScript.me.currentMat.GetComponent<MatScript>().mass;
 		spell.GetComponent<Rigidbody>().AddForce(spellSpawnLoc.transform.forward * spellSpd, ForceMode.Impulse);
 		spell.GetComponent<SpellScript>().mat = gameObject.GetComponent<PlayerScript>().currentMat;
+	}
+
+	private IEnumerator SpawnSpell_proj(float windup) // send out the spell
+	{
+		//float timer = 0f;
+		//while (timer < windup)
+		//{
+		//	print(timer);
+		//	timer += Time.deltaTime;
+		//	yield return null;
+		//}
+		yield return new WaitForSeconds(windup);
+		GameObject spell = Instantiate(spell_proj_prefab, spellSpawnLoc.position, spellSpawnLoc.rotation);
+		spell.GetComponent<MeshRenderer>().material = PlayerScript.me.currentMat.GetComponent<MatScript>().myMaterial;
+		//spell.GetComponent<Rigidbody>().mass = PlayerScript.me.currentMat.GetComponent<MatScript>().mass;
+		spell.GetComponent<Rigidbody>().mass = PlayerScript.me.currentMat.GetComponent<MatScript>().mass;
+		spell.GetComponent<Rigidbody>().AddForce(spellSpawnLoc.transform.forward * spellSpd, ForceMode.Impulse);
+		spell.GetComponent<SpellScript>().mat = gameObject.GetComponent<PlayerScript>().currentMat;
+		
+
 	}
 
 	private void SpawnSpell_aoe() // spawn a collider

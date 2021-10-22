@@ -684,6 +684,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: windup
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
       propertyPath: matCastType
       value: 1
       objectReference: {fileID: 0}
@@ -830,6 +834,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 199564424747727129, guid: 227da076e12dbfa4b990f022b9a9dc8e, type: 3}
   m_PrefabInstance: {fileID: 199564423075833588}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1708728302
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708728301}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cbd4f8f70edfdd746a020828161f4310, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1782262762
 GameObject:
   m_ObjectHideFlags: 0
