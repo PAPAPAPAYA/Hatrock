@@ -75,19 +75,20 @@ public class EffectManager : MonoBehaviour
 
 	public void DropMat(GameObject target, EffectStruct effect)
 	{
-		if (effect.matProduce.Count > 0)
+		if (target.GetComponent<Enemy>() != null)
 		{
-			GameObject matDropped = effect.matProduce[Random.Range(0, effect.matProduce.Count)];
-			if (effect.dropMat)
+			Enemy eS = target.GetComponent<Enemy>();
+			if (effect.matProduce.Count > 0)
 			{
-				print(target.name + " dropped " + matDropped.name);
-				Vector3 spawnPos = new Vector3(target.transform.position.x, target.transform.position.y + 0.7f, target.transform.position.z);
-				GameObject droppedMat = Instantiate(matDropped, spawnPos, Quaternion.identity);
-				droppedMat.GetComponent<Rigidbody>().AddForce(
-					new Vector3(Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount), 
-					3, 
-					Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount)), 
-					ForceMode.Impulse);
+				if (effect.dropMat)
+				{
+					eS.dropMeter += effect.dropMatAmount;
+					if (eS.dropMeter >= eS.dropMeterMax)
+					{
+						eS.dropMeter = 0;
+						SpawnMat(target, effect);
+					}
+				}
 			}
 		}
 	}
@@ -164,16 +165,35 @@ public class EffectManager : MonoBehaviour
 	{
 		int timer = 1;
 		yield return new WaitForSeconds(1f);
-		while (timer <= effect.HOT_duration)
+		print(target.name);
+		//if (target.GetComponent<PlayerScript>() != null)
 		{
-			timer += 1;
-			print("healed " + effect.HOT_interval + " HOT HP to " + target.name);
-			target.GetComponent<PlayerScript>().hp += effect.HOT_interval;
-			yield return new WaitForSeconds(1f);
+			
+			while (timer <= effect.HOT_duration)
+			{
+				timer += 1;
+
+				print("healed " + effect.HOT_interval + " HOT HP to " + target.name);
+				target.GetComponent<PlayerScript>().hp += effect.HOT_interval;
+				yield return new WaitForSeconds(1f);
+			}
+			if (timer > effect.HOT_duration)
+			{
+				StopCoroutine(DoHOT(effect, target));
+			}
 		}
-		if (timer > effect.HOT_duration)
-		{
-			StopCoroutine(DoHOT(effect, target));
-		}
+	}
+
+	public void SpawnMat(GameObject target, EffectStruct effect)
+	{
+		GameObject matDropped = effect.matProduce[Random.Range(0, effect.matProduce.Count)];
+		print(target.name + " dropped " + matDropped.name);
+		Vector3 spawnPos = new Vector3(target.transform.position.x, target.transform.position.y + 0.7f, target.transform.position.z);
+		GameObject droppedMat = Instantiate(matDropped, spawnPos, Quaternion.identity);
+		droppedMat.GetComponent<Rigidbody>().AddForce(
+			new Vector3(Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount),
+			3,
+			Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount)),
+			ForceMode.Impulse);
 	}
 }

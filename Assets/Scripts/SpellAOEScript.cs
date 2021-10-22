@@ -15,7 +15,7 @@ public class SpellAOEScript : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("Enemy"))
+		if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
 		{
 			// !effect here
 			EffectManager.me.ProcessEffects(mat, other.gameObject);

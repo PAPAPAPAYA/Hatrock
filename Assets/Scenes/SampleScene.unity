@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 675428771}
   - component: {fileID: 675428770}
   - component: {fileID: 675428769}
+  - component: {fileID: 675428773}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Enemy
@@ -299,9 +300,45 @@ Transform:
   m_LocalScale: {x: 1, y: 3.04, z: 1}
   m_Children:
   - {fileID: 1981161471}
+  - {fileID: 1310455938}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 18.049, z: 0}
+--- !u!114 &675428773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675428768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ba89d365c2835c4e831b7673416b539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+  maxHealth: 0
+  moveSpeed: 0
+  atkSpd: 0
+  attack: 0
+  atkRange: 0
+  preAtkSpd: 0
+  atkTime: 0
+  postAtkSpd: 0
+  hitted: 0
+  interrupted: 0
+  ghostRider: {fileID: 0}
+  target: {fileID: 0}
+  myAC: {fileID: 0}
+  myTrigger: {fileID: 0}
+  Origin: {r: 1, g: 0.5, b: 0.5, a: 0.3}
+  TempAtkColor: {r: 1, g: 0, b: 0, a: 0.3}
+  phase: 0
+  attackable: 0
+  walkable: 0
+  dropMeter: 0
+  dropMeterMax: 20
+  dropMeterUI: {fileID: 1310455937}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1878301129661876281, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
       propertyPath: m_RootOrder
@@ -616,7 +653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
       propertyPath: m_LocalRotation.w
@@ -646,6 +683,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: matCastType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].dropMat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].dropMatAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].matProduce.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].matProduce.Array.data[0]
+      value: 
+      objectReference: {fileID: 2429920367318801475, guid: 246cc5031e223c548b132211d37c5988, type: 3}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].matProduce.Array.data[1]
+      value: 
+      objectReference: {fileID: 8441474695682364324, guid: 212051402683f614781bcf259e7847f1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
 --- !u!1 &1262507900 stripped
@@ -653,6 +714,101 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1878301129661876281, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
   m_PrefabInstance: {fileID: 1262507899}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1310455937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1310455938}
+  - component: {fileID: 1310455940}
+  - component: {fileID: 1310455939}
+  m_Layer: 0
+  m_Name: Testing Only Drop Meter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1310455938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310455937}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0930911, y: 0.8223685, z: -0.11153972}
+  m_LocalScale: {x: 1, y: 0.3289474, z: 1}
+  m_Children: []
+  m_Father: {fileID: 675428772}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 18.049, z: 0}
+--- !u!102 &1310455939
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310455937}
+  m_Text: test
+  m_OffsetZ: 0
+  m_CharacterSize: 0.08
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 64
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &1310455940
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310455937}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1350781856 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7742937123064160813, guid: dbf3a9937b057a349823f4ce83443e03, type: 3}

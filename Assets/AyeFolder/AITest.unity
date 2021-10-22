@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 4454e526f3ed7b1498e1191d471204a5, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: c23c4ac91a070f74991e0ea263fd40ac, type: 2}
 --- !u!1 &2299516
 GameObject:
   m_ObjectHideFlags: 0
@@ -35174,6 +35174,91 @@ MonoBehaviour:
     - EdgeIndices: 14000000150000001600000017000000
       TexGenIndex: 5
     Generation: 63
+--- !u!1001 &767483352
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1878301129661876281, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_Name
+      value: Test Mat
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878301129661876285, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: matCastType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].dropMat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].myCtrlType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].ctrl_duration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].dropMatAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].matProduce.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800329985359826309, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+      propertyPath: myEffects.Array.data[0].matProduce.Array.data[0]
+      value: 
+      objectReference: {fileID: 2429920367318801475, guid: 246cc5031e223c548b132211d37c5988, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
 --- !u!1 &783381380
 GameObject:
   m_ObjectHideFlags: 0
@@ -56925,6 +57010,11 @@ MonoBehaviour:
     - EdgeIndices: 07000000060000000500000004000000
       TexGenIndex: 5
     Generation: 290
+--- !u!1 &1274494215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1878301129661876281, guid: 15fe43c742ecdab4b9403836ac8970ae, type: 3}
+  m_PrefabInstance: {fileID: 767483352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1279966601
 GameObject:
   m_ObjectHideFlags: 0
@@ -74429,7 +74519,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623671488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 3, z: -5.5}
+  m_LocalPosition: {x: 0.5, y: 3, z: 69.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2039028051}
@@ -74467,8 +74557,11 @@ MonoBehaviour:
   Origin: {r: 1, g: 0.5, b: 0.5, a: 0.2}
   TempAtkColor: {r: 1, g: 0, b: 0, a: 1}
   phase: 1
-  attackable: 0
-  walkable: 0
+  attackable: 1
+  walkable: 1
+  dropMeter: 0
+  dropMeterMax: 20
+  dropMeterUI: {fileID: 0}
 --- !u!1 &1626291346
 GameObject:
   m_ObjectHideFlags: 0
@@ -74903,6 +74996,10 @@ PrefabInstance:
     - target: {fileID: 2174258576397472072, guid: 57d520f0554298648be9d1affdcfbf69, type: 3}
       propertyPath: m_Name
       value: EffectManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2174258576397472078, guid: 57d520f0554298648be9d1affdcfbf69, type: 3}
+      propertyPath: droppedMat_flyAmount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2174258576397472079, guid: 57d520f0554298648be9d1affdcfbf69, type: 3}
       propertyPath: m_RootOrder
@@ -83740,6 +83837,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 199564424747727131, guid: 227da076e12dbfa4b990f022b9a9dc8e, type: 3}
+      propertyPath: currentMat
+      value: 
+      objectReference: {fileID: 1274494215}
     - target: {fileID: 199564424747727131, guid: 227da076e12dbfa4b990f022b9a9dc8e, type: 3}
       propertyPath: recipeManager
       value: 

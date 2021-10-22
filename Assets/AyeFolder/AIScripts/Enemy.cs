@@ -31,8 +31,14 @@ public class Enemy : MonoBehaviour
     public enum AIPhase { NotInBattle, InBattle1, InBattle2 };
     public AIPhase phase;
 
+    // for ctrl
     public bool attackable;
     public bool walkable;
+
+    // for supply
+    public float dropMeter;
+    public float dropMeterMax;
+    public GameObject dropMeterUI;
 
     private void Awake()
     {
@@ -43,6 +49,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        dropMeterUI.GetComponent<TextMesh>().text = dropMeter.ToString();
         Debug.Log("InRange(): "+InRange());
     }
 
@@ -80,7 +87,7 @@ public class Enemy : MonoBehaviour
     {
         myTrigger.myMR.material.color = new Color(1, 1, 1, 1);
         /*deal damage here*/
-        EffectManager.me.KnockBack(2, gameObject, PlayerScript.me.gameObject);
+        EffectManager.me.KnockBack(1, gameObject, PlayerScript.me.gameObject);
     }
     public void TempPost(float time)
     {

@@ -24,5 +24,6 @@ public struct EffectStruct
 
     [Header("SPLY")]
     public bool dropMat;
+    public float dropMatAmount;
     public List<GameObject> matProduce; // for testing only
 }

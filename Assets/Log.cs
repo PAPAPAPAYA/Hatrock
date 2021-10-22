@@ -66,4 +66,14 @@
 	// ximpulse knock back
 	// knock back enemy
 	// xknock back player
+
+// 10/21/21
+// combat refine
+	// drop mat system change
+		// xaccumulated, not instant
+		// xui
+	// skill cast system change
+		// windup and backswing
+		// GP
+		// deal damage visual tell
 	
