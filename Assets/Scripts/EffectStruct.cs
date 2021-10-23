@@ -23,6 +23,6 @@ public struct EffectStruct
     public float HOT_duration;
 
     [Header("SPLY")]
-    public bool dropMat;
     public List<GameObject> matProduce; // for testing only
+    public float dropMatAmount;
 }
