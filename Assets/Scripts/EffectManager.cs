@@ -83,19 +83,16 @@ public class EffectManager : MonoBehaviour
 
 	public void DropMat(GameObject target, EffectStruct effect)
 	{
-		if (effect.matProduce.Count > 0)
+		if (target.GetComponent<Enemy>() != null &&
+			effect.matProduce.Count>0)
 		{
-			GameObject matDropped = effect.matProduce[Random.Range(0, effect.matProduce.Count)];
-			if (effect.dropMat)
+
+			Enemy eS = target.GetComponent<Enemy>();
+			eS.dropMeter += effect.dropMatAmount;
+			if (eS.dropMeter >= eS.dropMeterMax)
 			{
-				print(target.name + " dropped " + matDropped.name);
-				Vector3 spawnPos = new Vector3(target.transform.position.x, target.transform.position.y + 0.7f, target.transform.position.z);
-				GameObject droppedMat = Instantiate(matDropped, spawnPos, Quaternion.identity);
-				droppedMat.GetComponent<Rigidbody>().AddForce(
-					new Vector3(Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount), 
-					3, 
-					Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount)), 
-					ForceMode.Impulse);
+				eS.dropMeter = 0;
+				SpawnMat(target, effect);
 			}
 		}
 	}
@@ -186,5 +183,18 @@ public class EffectManager : MonoBehaviour
 		{
 			StopCoroutine(DoHOT(effect, target));
 		}
+	}
+
+	private void SpawnMat(GameObject target, EffectStruct effect)
+	{
+		GameObject matDropped = effect.matProduce[Random.Range(0, effect.matProduce.Count)];
+		print(target.name + " dropped " + matDropped.name);
+		Vector3 spawnPos = new Vector3(target.transform.position.x, target.transform.position.y + 0.7f, target.transform.position.z);
+		GameObject droppedMat = Instantiate(matDropped, spawnPos, Quaternion.identity);
+		droppedMat.GetComponent<Rigidbody>().AddForce(
+			new Vector3(Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount),
+			3,
+			Random.Range(-droppedMat_flyAmount, droppedMat_flyAmount)),
+			ForceMode.Impulse);
 	}
 }

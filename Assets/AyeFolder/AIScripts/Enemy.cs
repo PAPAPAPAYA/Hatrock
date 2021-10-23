@@ -36,6 +36,10 @@ public class Enemy : MonoBehaviour
     public bool walkable;
     public TextMeshProUGUI hittedStates;
 
+    [Header("Supply")]
+    public float dropMeter;
+    public float dropMeterMax;
+
     private void Awake()
     {
         ghostRider = GetComponent<NavMeshAgent>();
