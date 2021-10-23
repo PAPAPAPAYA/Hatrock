@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SpellCtrlScript : MonoBehaviour
 {
 	public PlayerScript ps;
+	private Animator anim;
 
 	[Header("PROJECTILE")]
     public Transform spellSpawnLoc;
@@ -46,11 +47,12 @@ public class SpellCtrlScript : MonoBehaviour
 		aoeOgColor = aoeRangeIndicator.GetComponent<SpriteRenderer>().color;
 		ps = gameObject.GetComponent<PlayerScript>();
 		//pieRangeIndicator.GetComponent<SpriteRenderer>().color = aoeOgColor;
+		anim = GetComponent<Animator>();
 	}
 	
 	private void Update()
 	{
-		if (PlayerScript.me.currentMat != null)
+		if (PlayerScript.me.currentMat != null && anim.GetCurrentAnimatorStateInfo(0).IsName("testIdle"))
 		{
 			currentCastType = PlayerScript.me.currentMat.GetComponent<MatScript>().matCastType;
 			// if cast type projectile
@@ -63,7 +65,7 @@ public class SpellCtrlScript : MonoBehaviour
 
 				if (Input.GetMouseButtonDown(0))
 				{
-					SpawnSpell_proj();
+					anim.Play("testWindup");
 				}
 			}
 			// if cast type aoe

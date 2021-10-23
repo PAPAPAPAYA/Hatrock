@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demon May Cry
       objectReference: {fileID: 0}
+    - target: {fileID: 5363780074866141289, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5363780074866141291, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
       propertyPath: namae
       value: Demon May Cry
@@ -30,6 +34,18 @@ PrefabInstance:
     - target: {fileID: 5363780074866141293, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5363780074866141293, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5363780074866141293, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5363780074866141293, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5363780074866141293, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
       propertyPath: m_LocalPosition.x

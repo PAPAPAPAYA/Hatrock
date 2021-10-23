@@ -8,17 +8,38 @@ public class AIStateAttacking : AIStateBase
     public override void StartState(Enemy myEnemy)
     {
         myEnemy.myTrigger.myMR.enabled = true;
+
+        if (myEnemy.attackable)
+        { 
+            if (myEnemy.phase == Enemy.AIPhase.InBattle1)
+            {
+                Debug.Log("knowck");
+                myEnemy.KnowckBackAtk();
+            }
+            else if (myEnemy.phase == Enemy.AIPhase.InBattle2)
+            {
+                myEnemy.SoundWaveAtk();
+            }
+         }
     }
 
     public override void Update(Enemy myEnemy)
     {
-        AtkTimer += Time.fixedDeltaTime;//change to after animation is over
-        myEnemy.Attacking();
-        if (AtkTimer > myEnemy.atkTime)
+        if (myEnemy.attackable)
         {
-            myEnemy.myAC.ChangeState(myEnemy.myAC.postAttackState);
+            AtkTimer += Time.fixedDeltaTime;//change to after animation is over
+
+
+            if (AtkTimer > myEnemy.atkTime)
+            {
+                myEnemy.myAC.ChangeState(myEnemy.myAC.postAttackState);
+            }
         }
-        
+        else if (!myEnemy.attackable)
+        {
+            myEnemy.myAC.ChangeState(myEnemy.myAC.idleState);
+        }
+
 
     }
 

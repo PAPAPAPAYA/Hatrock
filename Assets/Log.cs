@@ -66,4 +66,11 @@
 	// ximpulse knock back
 	// knock back enemy
 	// xknock back player
+
+// 10/2221
+// combat refine
+	// xwindup and backswing
+	// drop gradually
+		// drop meter
+		// ui
 	

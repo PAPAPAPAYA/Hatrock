@@ -12,19 +12,35 @@ public class AIStateIdle : AIStateBase
 
     public override void Update(Enemy myEnemy)
     {
-        
         myEnemy.Idleing();
+
         if (myEnemy.InRange())
         {
-            IdleTimer += Time.fixedDeltaTime;
-            if (IdleTimer > myEnemy.atkSpd)
+            
+            if (myEnemy.attackable)
             {
-                myEnemy.myAC.ChangeState(myEnemy.myAC.preAttackState);
+                IdleTimer += Time.fixedDeltaTime;
+                if (IdleTimer > myEnemy.atkSpd)
+                {
+                    myEnemy.myAC.ChangeState(myEnemy.myAC.preAttackState);
+                }
+            }
+            else if (!myEnemy.attackable)
+            {
+                
             }
         }
         else if (!myEnemy.InRange())
         {
-            myEnemy.myAC.ChangeState(myEnemy.myAC.walkingState);
+            if (myEnemy.walkable)
+            {
+                myEnemy.myAC.ChangeState(myEnemy.myAC.walkingState);
+            }
+            else if (!myEnemy.walkable)
+            {
+               
+            }
+
         }
     }
 
