@@ -70,7 +70,8 @@
 // 10/2221
 // combat refine
 	// xwindup and backswing
-	// drop gradually
-		// drop meter
-		// ui
+	// xdrop gradually
+		// xdrop meter
+		// xui
+// objects in level solution
 	

@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
     [Header("Supply")]
     public float dropMeter;
     public float dropMeterMax;
+    
 
     private void Awake()
     {

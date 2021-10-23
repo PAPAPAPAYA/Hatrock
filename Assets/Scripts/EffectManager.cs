@@ -140,7 +140,6 @@ public class EffectManager : MonoBehaviour
 		float timer = 0f;
 		while (timer < duration)
 		{
-			print(timer);
 			timer += Time.deltaTime;
 			yield return null;
 		}
