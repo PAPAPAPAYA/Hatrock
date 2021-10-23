@@ -106,7 +106,7 @@ public class EffectManager : MonoBehaviour
 			target.GetComponent<PlayerScript>().hp += effect.healAmount;
 		}
 
-        if (effect.HOT)
+        if (target.GetComponent<PlayerScript>() != null && effect.HOT)
         {
 			StartCoroutine(DoHOT(effect, target));
         }

@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 199564424747727109}
   - component: {fileID: 199564424747727110}
   - component: {fileID: 1708728302}
+  - component: {fileID: 5765651516322270349}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -573,11 +574,14 @@ MonoBehaviour:
   currentMat: {fileID: 0}
   recipeManager: {fileID: 0}
   tempInventory:
-  - {fileID: 1478154070093566531, guid: 699134f854649d041b639287d52979e4, type: 3}
-  - {fileID: 4380351066936016701, guid: 625161a5ab7fc944baf5ffd2d1fdae1b, type: 3}
-  - {fileID: 3072454774791025738, guid: b10d6266975052a4db91d28b836a1a6f, type: 3}
-  - {fileID: 8441474695682364324, guid: 212051402683f614781bcf259e7847f1, type: 3}
-  - {fileID: 2429920367318801475, guid: 246cc5031e223c548b132211d37c5988, type: 3}
+  - Mats: {fileID: 0}
+    matAmounts: 0
+  - Mats: {fileID: 0}
+    matAmounts: 0
+  - Mats: {fileID: 0}
+    matAmounts: 0
+  - Mats: {fileID: 0}
+    matAmounts: 0
   choosentMats: []
 --- !u!136 &199564424747727109
 CapsuleCollider:
@@ -628,3 +632,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!135 &5765651516322270349
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199564424747727129}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,12 +10,15 @@ public class PlayerScript : MonoBehaviour
 	public float rot_spd;
 	public float hp;
 	public GameObject currentMat;
+	public List<InventoryDict> requiredMats;
 	public GameObject recipeManager;
 	private GameObject selectedMat;
+	public GameObject tear;
+	public GameObject cotton;
 	
 	//Temp inventory
 	[Header("Temp Inventory")]
-	public List<GameObject> tempInventory;
+	public List<InventoryDict> tempInventory;
 	public List<GameObject> choosentMats;
 
 	private void Awake()
@@ -116,10 +119,10 @@ public class PlayerScript : MonoBehaviour
 		// select mat
 		if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-			if (tempInventory[0] != null)
+			if (tempInventory[0].matAmounts > 0)
             {
-				choosentMats.Add(tempInventory[0]);
-				selectedMat = tempInventory[0];
+				choosentMats.Add(tempInventory[0].Mats);
+				selectedMat = tempInventory[0].Mats;
 				recipeManager.SendMessage("SearchRecipeForMats", choosentMats);
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
@@ -127,40 +130,40 @@ public class PlayerScript : MonoBehaviour
         }
 		else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-			if (tempInventory[1] != null)
+			if (tempInventory[1].matAmounts > 0)
             {
-				choosentMats.Add(tempInventory[1]);
-				selectedMat = tempInventory[1];
+				choosentMats.Add(tempInventory[1].Mats);
+				selectedMat = tempInventory[1].Mats;
 				recipeManager.SendMessage("SearchRecipeForMats", choosentMats);
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
         }
 		else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-			if (tempInventory[2] != null)
+			if (tempInventory[2].matAmounts > 0)
             {
-				choosentMats.Add(tempInventory[2]);
-				selectedMat = tempInventory[2];
+				choosentMats.Add(tempInventory[2].Mats);
+				selectedMat = tempInventory[2].Mats;
 				recipeManager.SendMessage("SearchRecipeForMats", choosentMats);
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
         }
 		else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-			if(tempInventory[3] != null)
+			if(tempInventory[3].matAmounts > 0)
             {
-				choosentMats.Add(tempInventory[3]);
-				selectedMat = tempInventory[3];
+				choosentMats.Add(tempInventory[3].Mats);
+				selectedMat = tempInventory[3].Mats;
 				recipeManager.SendMessage("SearchRecipeForMats", choosentMats);
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
         }
 		else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-			if(tempInventory[4] != null)
+			if(tempInventory[4].matAmounts > 0)
             {
-				choosentMats.Add(tempInventory[4]);
-				selectedMat = tempInventory[4];
+				choosentMats.Add(tempInventory[4].Mats);
+				selectedMat = tempInventory[4].Mats;
 				recipeManager.SendMessage("SearchRecipeForMats", choosentMats);
 				recipeManager.SendMessage("SearchForCombinations", choosentMats);
 			}
@@ -173,9 +176,97 @@ public class PlayerScript : MonoBehaviour
 		choosentMats.Add(selectedMat);
     }
 
-	public void ChangeSpell(GameObject outcome)
+	public void ChangeSpell(Recipe recipe)
+    {
+		currentMat = recipe.Outcome;
+		Debug.Log(currentMat.name);
+		requiredMats.Clear();
+		foreach(var mat in recipe.materials)
+        {
+			requiredMats.Add(mat);
+        }
+    }
+
+	public void RefreshSpell(GameObject outcome)
     {
 		currentMat = outcome;
 		Debug.Log(currentMat.name);
+		requiredMats.Clear();
+		InventoryDict inDic = new InventoryDict();
+		inDic.Mats = outcome;
+		inDic.matAmounts = 1;
+		requiredMats.Add(inDic);
+    }
+
+    //拾取素材
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "DroppedMat" && tempInventory[3].matAmounts == 0)
+        {
+			InventoryDict droppedMat = new InventoryDict();
+
+			//这是用魔法写的，必须要改，但想不到咋办
+			if (other.gameObject.name.ToString() == "Tear(Clone)")
+				droppedMat.Mats = tear;
+			else if (other.gameObject.name.ToString() == "Cotton(Clone)")
+				droppedMat.Mats = cotton;
+
+			recipeManager.GetComponent<RecipeManagerScript>().bossMat.text = "4:" + droppedMat.Mats.name.ToString();
+			droppedMat.matAmounts = 1;
+
+			tempInventory.RemoveAt(3);
+			tempInventory.Add(droppedMat);
+
+			Destroy(other.gameObject);
+        }
+    }
+
+	public bool ConsumeMats()
+    {
+		List<GameObject> inventoryList = new List<GameObject>();
+		foreach(var mat in tempInventory)
+        {
+			inventoryList.Add(mat.Mats);
+        }
+		foreach(var mat in requiredMats)
+        {
+			for(int i = 0; i < tempInventory.Count; i++)
+            {
+				if(mat.Mats == tempInventory[i].Mats)
+                {
+					if(tempInventory[i].matAmounts < mat.matAmounts)
+                    {
+						return false;
+					}
+                }
+            }
+            if (!inventoryList.Contains(mat.Mats))
+            {
+				return false;
+            }
+        }
+		foreach (var mat in requiredMats)
+		{
+			for (int i = 0; i < tempInventory.Count; i++)
+			{
+				if (mat.Mats == tempInventory[i].Mats)
+				{
+					if (tempInventory[i].matAmounts >= mat.matAmounts)
+					{
+						tempInventory[i].matAmounts -= mat.matAmounts;
+
+						if(i == 3)
+                        {
+							choosentMats.Remove(tempInventory[i].Mats);
+							tempInventory[i].Mats = null;
+							recipeManager.GetComponent<RecipeManagerScript>().bossMat.text = "4:None";
+							//recipeManager.SendMessage("SearchRecipeForMats", choosentMats);
+							recipeManager.SendMessage("SearchForCombinations", choosentMats);
+                        }
+					}
+				}
+			}
+		}
+		return true;
     }
 }

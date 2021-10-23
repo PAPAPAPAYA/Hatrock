@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -12,8 +12,7 @@ public class RecipeManagerScript : MonoBehaviour
     public TextMeshProUGUI match;
     public TextMeshProUGUI argyi;
     public TextMeshProUGUI nail;
-    public TextMeshProUGUI tear;
-    public TextMeshProUGUI cotton;
+    public TextMeshProUGUI bossMat;
     
     public List<GameObject> possibleCombinations;
 
@@ -21,9 +20,14 @@ public class RecipeManagerScript : MonoBehaviour
     {
         for(int i = 0; i < recipeList.Count; i++)
         {
-            if(CompareList(i, choosenMats))
+            List<GameObject> recipeMats = new List<GameObject>();
+            foreach (var mat in recipeList[i].materials)
             {
-                player.SendMessage("ChangeSpell", recipeList[i].Outcome);
+                recipeMats.Add(mat.Mats);
+            }
+            if (CompareList(i, choosenMats, recipeMats))
+            {
+                player.SendMessage("ChangeSpell", recipeList[i]);
                 instruction.text = "";
                 /*instruction.text = "Selected Materials: ";
                 foreach (var mat in recipeList[i].Materials)
@@ -43,7 +47,7 @@ public class RecipeManagerScript : MonoBehaviour
                 {
                     instruction.text = /*"Selected Materials: " + choosenMats[choosenMats.Count - 1].name + */"Outcome:\n" + choosenMats[choosenMats.Count - 1].name;
                 }
-                player.SendMessage("ChangeSpell", choosenMats[choosenMats.Count - 1]);
+                player.SendMessage("RefreshSpell", choosenMats[choosenMats.Count - 1]);
             }
         }
     }
@@ -54,16 +58,20 @@ public class RecipeManagerScript : MonoBehaviour
         match.color = new Color32(255, 255, 255, 255);
         argyi.color = new Color32(255, 255, 255, 255);
         nail.color = new Color32(255, 255, 255, 255);
-        tear.color = new Color32(255, 255, 255, 255);
-        cotton.color = new Color32(255, 255, 255, 255);
+        bossMat.color = new Color32(255, 255, 255, 255);
         //combination.text = "Possible Combination:\n";
         for (int i = 0; i < recipeList.Count; i++) 
         {
-            if (ContainsList(i, matList))
+            List<GameObject> recipeMats = new List<GameObject>();
+            foreach(var mat in recipeList[i].materials)
             {
-                for (int c = 0; c < recipeList[i].Materials.Count; c++)
+                recipeMats.Add(mat.Mats);
+            }
+            if (ContainsList(i, matList, recipeMats))
+            {
+                for (int c = 0; c < recipeList[i].materials.Count; c++)
                 {
-                    possibleCombinations.Add(recipeList[i].Materials[c]);
+                    possibleCombinations.Add(recipeList[i].materials[c].Mats);
                 }
                 for (int c = 0; c < possibleCombinations.Count; c++)
                 {
@@ -75,14 +83,17 @@ public class RecipeManagerScript : MonoBehaviour
                             argyi.color = new Color32(87, 212, 197, 255);
                         if (matList[d].name == "Copper Nail - Drop Material Bullet")
                             nail.color = new Color32(87, 212, 197, 255);
-                        if (matList[d].name == "Demon May Cry")
-                            tear.color = new Color32(87, 212, 197, 255);
-                        if (matList[d].name == "Demon Mat B")
-                            cotton.color = new Color32(87, 212, 197, 255);
-                        if (possibleCombinations[c] == matList[d])
+                        if (matList[d].name == "Cotton" || matList[d].name == "Tear")
+                            bossMat.color = new Color32(87, 212, 197, 255);
+                        if (possibleCombinations[c].name == matList[d].name)
                         {
                             possibleCombinations.RemoveAt(c);
                         }
+                    }
+                    //谜之bug用了魔法解决问题...我真的不行了
+                    if (player.GetComponent<PlayerScript>().currentMat.name == "Explosion Spell - High Damage & DOT Spell")
+                    {
+                        possibleCombinations.RemoveAt(0);
                     }
                 }
             }
@@ -96,19 +107,17 @@ public class RecipeManagerScript : MonoBehaviour
                 argyi.color = new Color32(215, 140, 90, 255);
             if (mat.name == "Copper Nail - Drop Material Bullet")
                 nail.color = new Color32(215, 140, 90, 255);
-            if (mat.name == "Demon May Cry")
-                tear.color = new Color32(215, 140, 90, 255);
-            if (mat.name == "Demon Mat B")
-                cotton.color = new Color32(215, 140, 90, 255);
+            if (player.GetComponent<PlayerScript>().tempInventory[3].Mats != null && mat == player.GetComponent<PlayerScript>().tempInventory[3].Mats)
+                bossMat.color = new Color32(215, 140, 90, 255);
         }
     }
     
 
-    private bool ContainsList(int i, List<GameObject> matList)
+    private bool ContainsList(int i, List<GameObject> matList, List<GameObject> requiredMats)
     {
         for (int a = 0; a < matList.Count; a++)
         {
-            if (!recipeList[i].Materials.Contains(matList[a]))
+            if (!requiredMats.Contains(matList[a]))
             {
                 return false;
             }
@@ -116,17 +125,17 @@ public class RecipeManagerScript : MonoBehaviour
         return true;
     }
 
-    private bool CompareList(int i, List<GameObject> matList)
+    private bool CompareList(int i, List<GameObject> matList, List<GameObject> requiredMats)
     {
-        if (recipeList[i].Materials.Count != matList.Count)
+        if (recipeList[i].materials.Count != matList.Count)
         {
             return false;
         }
-        recipeList[i].Materials.Sort(CompareSort);
+        requiredMats.Sort(CompareSort);
         matList.Sort(CompareSort);
-        for(int b = 0; b < recipeList[i].Materials.Count; b++)
+        for(int b = 0; b < requiredMats.Count; b++)
         {
-            if (recipeList[i].Materials[b] != matList[b])
+            if (requiredMats[b] != matList[b])
                 return false;
         }
         return true;

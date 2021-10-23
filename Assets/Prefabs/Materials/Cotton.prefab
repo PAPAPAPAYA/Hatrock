@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4560419149740669901
+--- !u!1001 &7770739313799656490
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -17,15 +17,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5363780074866141289, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
       propertyPath: m_Name
-      value: Demon May Cry
+      value: Cotton
       objectReference: {fileID: 0}
     - target: {fileID: 5363780074866141289, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5363780074866141289, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
+      propertyPath: m_TagString
+      value: DroppedMat
+      objectReference: {fileID: 0}
     - target: {fileID: 5363780074866141291, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
       propertyPath: namae
-      value: Demon May Cry
+      value: Demon Mat B
       objectReference: {fileID: 0}
     - target: {fileID: 5363780074866141291, guid: 18c6bf2e166e43e46a396aead726f3d8, type: 3}
       propertyPath: matCastType
